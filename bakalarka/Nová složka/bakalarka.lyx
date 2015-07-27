@@ -1,0 +1,946 @@
+#LyX file created by tex2lyx 2.1
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+\usepackage[czech]{babel}
+%\newcommand\uv[1]{\quotedblbase #1\textquotedblleft}%
+\usepackage{indentfirst}
+\renewcommand{\sectfont}{\rmfamily}
+
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language czech
+\language_package default
+\inputencoding cp1250
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{titlepage}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+Large
+\end_layout
+
+\end_inset
+
+ Vysoká škola ekonomická v Praze
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+large
+\end_layout
+
+\end_inset
+
+ Fakulta informatiky a statistiky
+\begin_inset Newline newline
+\end_inset
+
+ Katedra informačních technologií
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset VSpace 2cm
+\end_inset
+
+ Studijní program: Aplikovaná informatika
+\begin_inset Newline newline
+\end_inset
+
+ Obor: Informatika
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset VSpace 4cm
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+huge
+\end_layout
+
+\end_inset
+
+ Název bakalářské práce
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset VSpace 2cm
+\end_inset
+
+ BAKALÁŘSKÁ PRÁCE
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset VSpace 3cm
+\end_inset
+
+ Student : Jméno a příjmení studenta
+\begin_inset Newline newline
+\end_inset
+
+ Vedoucí : Jméno a příjmení s tituly
+\begin_inset Newline newline
+\end_inset
+
+ Oponent : Jméno a příjmení s tituly
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset VSpace 2cm
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+par 
+\end_layout
+
+\end_inset
+
+2016 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+par 
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%prohlaseni----------------------------------------------------------------------
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang czech
+
+\begin_inset VSpace 15cm*
+\end_inset
+
+ 
+\size large
+Prohlášení
+\begin_inset Newline newline
+\end_inset
+
+
+\size default
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset VSpace 1cm
+\end_inset
+
+ Prohlašuji, že jsem bakalářskou/diplomovou práci zpracoval(a) samostatně a že jsem uvedl(a) všechny použité prameny a literaturu, ze které jsem čerpal(a).
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset VSpace 3cm
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\align right
+
+\lang czech
+V Praze dne den. měsíc 2016 
+\begin_inset space \hspace{}
+\length 5cm
+\end_inset
+
+. . . . . . . . . . . . . . . . . . . . . . . . 
+\begin_inset Newline newline
+\end_inset
+
+ Jméno a příjmení studenta 
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%podekovani--------------------------------------------------------------------
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang czech
+
+\begin_inset VSpace 18cm*
+\end_inset
+
+ 
+\size large
+Poděkování
+\begin_inset Newline newline
+\end_inset
+
+
+\size default
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset VSpace 1cm
+\end_inset
+
+ Teoreticky tato pasáž ve vaši práci být nemusí a můžete ji smazat. Pokud byste však chtěli někomu poděkovat, zde je to správné místo. V poděkování můžete uvést vedoucího práce, případně konzultanta, nesmíte zde však uvést oponenta. Mezi ty, kterým děkujete, můžete samozřejmě zařadit i své blízké, i když to nebývá zvykem. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%abstrakt cz ---------------------
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\series bold
+Abstrakt
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+ Obsahuje zaměření a hlavní cíl práce, způsob dosažení cíle, přínos práce (vlastní příspěvek k řešenému tématu) a stručně popsanou strukturu práce.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\series bold
+Klíčová slova 
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+ Seznam nejvýznamnějších odborných výrazů charakterizujících téma závěrečné práce.
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%abstract en -------------
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\series bold
+Abstract
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+ Obsahuje zaměření a hlavní cíl práce, způsob dosažení cíle, přínos práce (vlastní příspěvek k řešenému tématu) a stručně popsanou strukturu práce.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\series bold
+Key words 
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+ Seznam nejvýznamnějších odborných výrazů charakterizujících téma závěrečné práce.
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%obsah------------------------------------------------------------------------
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%text----------------------------------------------------------------------------
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+
+\lang czech
+Úvod
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+blablablablabalalbal 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+setcounter{page}{1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+
+\lang czech
+Historie
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+V roce 1956 americký matematik a logik Stephen Cole Kleene popsal konečné automaty, které rozpoznávají formální jazyk. Jazyk rozpoznatelný konečným automatem se poté nazývá regulárním jazykem.
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+Na Kleeneho v roce 1968 navázal programátor, známý především díky operačnímu systému Unix, Kenneth Thomson. Publikoval článek 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+uv
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+Regular Expression Search Algorithm
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "2"
+
+\end_inset
+
+, ve kterém popsal algoritmus pro vyhledávání pomocí regulárních výrazů v textu.
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+Thomson také implementoval Kleeneho notaci do textového editoru QED. Tuto funkci poté zabudoval i do unixového editoru ed, co později vedlo ke vzniku vyhledávacího počítačového programu grep.Později byly regulární výrazy zabudovány do jazyka AWT či do příkazu expr používaném v příkazové řádce v unixových systémech.
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+Komplikovanější regulární výrazy se v 80. letech minulého století začaly objevovat v jazyce Perl. Vycházely přitom z regex knihovny napsané kanadským programátorem Henry Spencerem. Začaly se zde objevovat i regulární výrazy, na které nebylo možné použít konečný automat. Spencer později regulární výrazy implementoval i do skriptovacího jazyka Tcl, známé pod názvem Advance Regular Expressions (ARE).
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+V roce 1992 byly regulární výrazy v původní podobě standardizovány v POSIX.2 standardu. Nicméně počítačový programátor Philip Hazel v roce 1997 vyvynul PCRE (Perl Compatible Regular Expressions), jehož syntaxe je více flexibilní než v POSIXu. Je využíván například v jazyce PHP nebo Apache HTTP Server.[3]I když úplný název PCRE zní 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+uv
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+Perl Compatible Regular Expressions
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+, PCRE a Perl mají své odlišnosti[4], které v této práci nebudou podrobnějí popsány.
+\end_layout
+
+\begin_layout Standard
+
+\lang czech
+Dnes jsou regulární výrazy podporovány v mnoha jazycích a textových editorech jako například Java, Python, JavaScript atd.
+\end_layout
+
+\begin_layout Bibliography
+
+\lang czech
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "1"
+
+\end_inset
+
+ DOSTÁL, Hubert. 
+\emph on
+Teorie konečných automatů, regulárních gramatik, jazyků a výrazů
+\emph default
+ [online]. 2008 [cit. 2015-07-11]. Dostupné z: 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+verb|http://iris.uhk.cz/tein/teorie/regJazyk.html|
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+
+\lang czech
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "2"
+
+\end_inset
+
+ THOMPSON, Ken. 
+\emph on
+Regular Expression Search Algorithm
+\emph default
+. Communications of the ACM: Volume 11 [online]. 1968, (6): 419-422 [cit. 2015-07-11]. Dostupné z: http://www.fing.edu.uy/inco/cursos/intropln/material/p419-thompson.pdf
+\end_layout
+
+\begin_layout Bibliography
+
+\lang czech
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "3"
+
+\end_inset
+
+ Perl Compatible Regular Expressions. 
+\emph on
+Wikipedia
+\emph default
+ [online]. 2015-07-03 [cit. 2015-07-11]. Dostupné z: 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+verb|https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions|
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+
+\lang czech
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "4"
+
+\end_inset
+
+ Regular Expression. 
+\emph on
+Wikipedia
+\emph default
+ [online]. 2015-07-08 [cit. 2015-07-11]. Dostupné z: 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+verb|https://en.wikipedia.org/wiki/Regular_expression|
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

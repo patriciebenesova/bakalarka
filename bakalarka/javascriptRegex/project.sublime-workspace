@@ -1,0 +1,360 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sou",
+				"sourcemaps"
+			],
+			[
+				"an",
+				"answer"
+			],
+			[
+				"regex",
+				"regex"
+			],
+			[
+				"pom",
+				"pom2"
+			],
+			[
+				"str",
+				"strArray"
+			],
+			[
+				"is",
+				"isMobile"
+			],
+			[
+				"gu",
+				"gutil"
+			],
+			[
+				"pro",
+				"projectTest"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "gulpfile.js",
+			"settings":
+			{
+				"buffer_size": 373,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/script.js",
+			"settings":
+			{
+				"buffer_size": 1168,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 304,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/Node.sublime-build",
+	"command_palette":
+	{
+		"height": 356.0,
+		"selected_items":
+		[
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/script.js",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/dist/output.js",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/src/index.html",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/dist/all.js.map",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/build/js/script.min.js",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/dist/all.js",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/index.html",
+		"/C/Users/patbe_000/Documents/projectTest/gulpfile.js",
+		"/C/Users/patbe_000/Documents/projectTest/src/app.js",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/project.sublime-workspace",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/javascriptRegex/project.sublime-project",
+		"/C/Users/patbe_000/Desktop/11_language/index.html",
+		"/C/Users/patbe_000/Desktop/11_language/code/chapter/11_language.js",
+		"/C/Users/patbe_000/Desktop/11_language/run_with_node.js",
+		"/C/Users/patbe_000/Desktop/11_language/code/load.js",
+		"/C/Users/patbe_000/Desktop/11_language/code/chapter/languageTest.js",
+		"/C/Users/patbe_000/Documents/school/bakalarka/bakalarka/gnu.awk",
+		"/C/projectsWork/eurojackpot/web/js/libs/branches.js",
+		"/C/projectsWork/eurojackpot/web/js/vendor/sly.min.js",
+		"/C/projectsWork/eurojackpot/web/js/vendor/boxsizing.htc",
+		"/C/projectsWork/eurojackpot/web/js/vendor/css3-mediaqueries.js",
+		"/C/projectsWork/eurojackpot/app/config/parameters.yml.test",
+		"/C/projectsWork/eurojackpot/app/config/parameters.yml.prod",
+		"/C/projectsWork/eurojackpot/app/config/parameters.yml.local",
+		"/C/projectsWork/eurojackpot/app/config/config.yml",
+		"/C/projectsWork/eurojackpot/app/AppKernel.php",
+		"/C/projectsWork/eurojackpot/src/Sazka/EurojackpotBundle/Tests/Controller/DefaultControllerTest.php",
+		"/C/projectsWork/eurojackpot/app/SymfonyRequirements.php",
+		"/C/projectsWork/eurojackpot/src/Sazka/EurojackpotBundle/Tests/Controller/RedirectControllerTest.php",
+		"/C/projectsWork/eurojackpot/src/Sazka/EurojackpotBundle/Tests/Controller/CinemaControllerTest.php",
+		"/C/Users/patbe_000/Desktop/index.html",
+		"/C/projectsWork/eurojackpot/web/js/vendor/modernizr.js",
+		"/C/projectsWork/eurojackpot/web/js/global.js",
+		"/C/projectsWork/eurojackpot/gulpfile.js",
+		"/C/projectsWork/eurojackpot/src/Sazka/EurojackpotBundle/Resources/views/header.html.twig",
+		"/C/projectsWork/eurojackpot/web/less/site.less",
+		"/C/projectsWork/eurojackpot/web/less/cinema/cinema-layer.less",
+		"/C/projectsWork/eurojackpot/composer.json",
+		"/C/projectsWork/eurojackpot/web/less/cinema/cinema-map.less",
+		"/C/projectsWork/eurojackpot/web/less/cinema/cinema.less",
+		"/C/projectsWork/eurojackpot/web/less/cinema/cinema-votes.less",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/dist/arrowFunctions.js",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/modules.sublime-project",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/gulpfile.js",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/arrowFunctions.js",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/imports/ConsoleWrapper.js",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/dist/gulpfile.js",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/dist/main.js",
+		"/C/Users/patbe_000/Documents/ES6ModulesWithBabel-master/README.md",
+		"/C/Users/patbe_000/Documents/projectTest/projectTest.sublime-project",
+		"/C/Users/patbe_000/Documents/projectTest/app.js",
+		"/C/Users/patbe_000/Documents/projectTest/main.html",
+		"/C/Users/patbe_000/Documents/projectTest/package.json",
+		"/C/Users/patbe_000/Documents/projectTest/project.sublime-project",
+		"/C/Users/patbe_000/Documents/projectTest/testJava.js",
+		"/C/Users/patbe_000/Documents/projectTest/project.sublime-workspace",
+		"/C/Users/patbe_000/Documents/gulpfile.js",
+		"/C/Users/patbe_000/AppData/Roaming/Sublime Text 2/Packages/User/echo.sublime-snippet",
+		"/C/Users/patbe_000/Documents/testJava.js",
+		"/C/Users/patbe_000/AppData/Roaming/Sublime Text 2/Packages/User/Node.sublime-build",
+		"/C/Users/patbe_000/Documents/test.html",
+		"/C/Users/patbe_000/OneDrive/Documents/test.es6",
+		"/C/Users/patbe_000/OneDrive/Documents/test.es6.js",
+		"/C/Users/patbe_000/OneDrive/Documents/javaScriptTest",
+		"/C/Users/patbe_000/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"arguments",
+			"argume",
+			"arguments",
+			"call",
+			"evalu",
+			"Function",
+			"read",
+			"rea",
+			"ready",
+			".js",
+			"step",
+			"cinema-layer[data-step=",
+			"cinema-layer"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "gulpfile.js",
+					"settings":
+					{
+						"buffer_size": 373,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								373,
+								373
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/script.js",
+					"settings":
+					{
+						"buffer_size": 1168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "package.json",
+					"settings":
+					{
+						"buffer_size": 304,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								250,
+								250
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 118.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"test.sublime-project",
+				"/C/Users/patbe_000/Documents/test/test.sublime-project"
+			],
+			[
+				"",
+				"/C/Users/patbe_000/Documents/test/test.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 281.0,
+	"status_bar_visible": true
+}

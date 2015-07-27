@@ -1,0 +1,30 @@
+\BOOKMARK [0][-]{chapter.1}{\332vod}{}% 1
+\BOOKMARK [1][-]{section.1.1}{vymezen\355 t\351matu pr\341ce a duvod v\375beru t\351matu}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{c\355le pr\341ce}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{zpusob/metoda dosa\236en\355 c\355le}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{predpoklady a omezen\355 pr\341ce, struktura pr\341ce}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{v\375stupy pr\341ce \(pr\355p. komu jsou urceny\) a ocek\341van\351 pr\355nosy}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{Historie}{}% 7
+\BOOKMARK [0][-]{chapter.3}{Syntaxe regul\341rn\355ch v\375razu}{}% 8
+\BOOKMARK [1][-]{section.3.1}{Definice}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.2}{Liter\341ly a jejich retezen\355}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.3}{Metaznaky}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.4}{Flagy}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.5}{Backtracking}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.5.1}{greedy vs lazy}{section.3.5}% 14
+\BOOKMARK [2][-]{subsection.3.5.2}{Atomick\351 seskupov\341n\355}{section.3.5}% 15
+\BOOKMARK [2][-]{subsection.3.5.3}{Posesivn\355 kvantifik\341tory}{section.3.5}% 16
+\BOOKMARK [1][-]{section.3.6}{UNICODE vlastnosti}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.7}{Look Around}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.8}{Zachycov\341n\355 \(capture\)}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.8.1}{Seskupen\355 \(?: \)}{section.3.8}% 20
+\BOOKMARK [2][-]{subsection.3.8.2}{Zpetn\351 odkazy a jejich pojmenov\341v\341n\355}{section.3.8}% 21
+\BOOKMARK [1][-]{section.3.9}{\(?if then | else\)}{chapter.3}% 22
+\BOOKMARK [0][-]{chapter.4}{Jazyky s vestavenou podporou regul\341rn\355ch v\375razu}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Perl}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{Javascript}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.3}{AWK}{chapter.4}% 26
+\BOOKMARK [0][-]{chapter.5}{Jazyky s knihovnami}{}% 27
+\BOOKMARK [1][-]{section.5.1}{C\043}{chapter.5}% 28
+\BOOKMARK [1][-]{section.5.2}{Python}{chapter.5}% 29
+\BOOKMARK [1][-]{section.5.3}{Java}{chapter.5}% 30
