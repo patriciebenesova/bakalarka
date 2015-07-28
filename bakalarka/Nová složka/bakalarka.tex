@@ -321,7 +321,7 @@ Atomické seskupování není podporováno v jazyce Javascript.
 \end{figure}
 
 \section{UNICODE vlastnosti}
-Unicode Standard a ISO/IEC 10646 podporují UTF--8, UTF--16 a UTF--32.\cite{11} Co umoòuje pøevést libovolné znaky do standardizovaného kódu?????. Je podporováno mnoha jazyky, nicménì Javascript ani AWK jej nepodporují.
+Unicode Standard a ISO/IEC 10646 podporují UTF--8, UTF--16 a UTF--32.\cite{11} Co umoòuje pøevést libovolné znaky do standardizovaného kódu?????. Je podporováno mnoha jazyky vèetnì Javascriptu dle normy ECMAScript 6, nicménì AWK jej nepodporuje.
 
 Pro unicodové znaky (tzv. grafémy) mohou mít napøíklad tvar \verb|\u2122|, co je podporovanı tvar jazyky Javascript a Java (za pøedpokladu zapnutí módu unicode \verb|\u|), nebo \verb|\x{2122}| podporované jazykem Perl nebo PCRE. Tvar \verb|\u+0000| umoòuje pouít právì 4 hexa èíslice, zatímco \verb|\x{00}| umoòuje pouít pøáì tolik hexa èíslic, kolik je potøeba.
 
@@ -332,7 +332,8 @@ V regulárních vırazech mùeme pouít i unicodové vlastnosti (anglicky property).
 Pro matematické symboly, znaky mìn apod. mùeme pouít \verb|\p{S}|. Pro èísla existuje vlastnost \verb|\p{N}|, která zachytí veškerá èísla od 0 do 9 i øímské èíslice.
 Interpunkci (tzn. teèka, èárka, uvozovky, závorky apod..) je moné zachytit pomocí \verb|\p{P}|. Pro teèku a èárku mùeme pouít \verb|\p{Pd}|, pro úvodní závorku \verb|\p{Ps}| a uzavírající závorku \verb|\p{Pe}|. \cite[s.45-47]{5}
 
-Unicode bloky jsou tvoøeny seskupenımi unicodovımi znaky. Jsou podporovány pouze v jazyce Perl, .NET a Java. Syntaxe \verb|\p{nazev_bloku}| se ovšem v rùznıch jazycích mùe lišit. Java pouívá vdy pøed názvem bloku ve sloenıch závorkách \uv{In} (napø. \verb|\p{InBasicLatin}|) , Perl umoòuje jak \uv{In} tak \uv{Is}. Názvù blokù je celá øada, napøíklad blok pro znaky \verb|0000..007F| se nazıvá Basic\verb|_|Latin, \verb|0400..04FF| pro Cyrilici nebo \\ \verb|0600..06FF| pro Arabštinu (více viz. \cite{12}). \cite[s.44]{5}  
+Unicode bloky jsou tvoøeny seskupenımi unicodovımi znaky. Jsou podporovány pouze v jazyce Perl, .NET a Java. Syntaxe \verb|\p{nazev_bloku}| se ovšem v rùznıch jazycích mùe lišit. Java pouívá vdy pøed názvem bloku ve sloenıch závorkách \uv{In} (napø. \verb|\p{InBasicLatin}|) , Perl umoòuje jak \uv{In} tak \uv{Is}. Názvù blokù je celá øada, napøíklad blok pro znaky \verb|0000..007F| se nazıvá Basic\verb|_|Latin, \verb|0400..04FF| pro Cyrilici nebo \\ \verb|0600..06FF| pro Arabštinu (více viz. \cite{12}). \cite[s.44]{5}
+V jazyce Javascript jde stejného vısledku dosáhnout pomocí tøídy znakù napø. \verb|/[\u0400-\u04FF]+/|.  
 
 Synatexe pro unicode písma \verb|\p{nazev_skriptu}| je podporována v Javì (od verze 7), PCRE i Perlu. Java vyaduje pøed názvem skriptu ještì \uv{Is} (napø. \verb|\p{IsGreek}|)\cite{13}. Názvy unicodovıch skriptù jsou napøíklad: \uv{Latin},\uv{Arabic},\uv{Brahmi} nebo od verze 8 také \uv{Multani}\cite{14}.
 
@@ -363,9 +364,15 @@ Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazo
 %jazyky s vestavenou podporou ---------------------
 \chapter{Jazyky s vestavìnou podporou regulárních vırazù}
 \section{Perl}
+\section{AWK}
+\subsection{Obecné informace}
+AWK je jak poèítaèovım programem, tak i programovacím jazykem, kterı umoòuje danı program ovládat. Je zahrnut témìø ve všech UNIX systémech. Slouí zejména ke zpracování textovıch dat. K tomu hojnì vyuívá regulární vırazy.
+
+\subsection{Syntaxe}
+Jazyk AWK se vyznaèuje hned nìkolika odlištnostmi od ostatních modifikací regulárních vırazù. Regulární vıraz se zapisuje mezi dvì lomítka \verb|(\ ... \)|. 
 \section{Javascript}
 \subsection{Obecné informace}
-Javascript je objektovì orientovanı jazyk, pouívanı jako skriptovací jazyk pro webové stránky. Nicménì je spustitelnı i v nástroji node.js. Standardem pro Javascript je ECMAScript. Nejnovìjší verzí je ECMAScript 6 vydaná v roce 2015. Ovšem není podporován všemi internetovımi prohlíeèi ani nástrojem node.js, proto se v této kapitole budu dret syntaxe standardizovaném ECMAScript 5.1, která je plnì podporována.
+Javascript je objektovì orientovanı jazyk, pouívanı jako skriptovací jazyk pro webové stránky. Nicménì je spustitelnı i v nástroji node.js. Standardem pro Javascript je ECMAScript. Nejnovìjší verzí je ECMAScript 6 (neboli ECMA--262 6. edice) vydaná v roce 2015. Ovšem není podporován všemi internetovımi prohlíeèi ani nástrojem node.js, proto se v této kapitole budu dret syntaxe standardizovaném ECMAScript 5.1, která je plnì podporována.
 
 ECMAScript 6 pøináší vıznamné novinky z hlediska syntaxe\footnote{Více informací o zmìnách lze nalézt zde: http://es6-features.org/}. Z hlediska regulárních vırazù byly pøidány dvì vlajeèky a to: \verb|\u| pro unicodové vlastnosti a \verb|\y| tzn. \uv{sticky matcher}, kterı umoòuje procházet zadanı textovı øetìzec od pozice dané v promìnné \textit{RegExp.lastIndex}.
 \subsection{Syntaxe}
@@ -394,8 +401,59 @@ function prevodReg(reg,f){
 	return vystup;
 };
 \end{lstlisting}
-\section{AWK}
-gsub
+
+Takto vytvoøenı RegExp objekt dìdí po svém pøedku metody:
+\begin{itemize}
+	\item \textit{RegExp.prototype.test()}, která otestuje, zda zadanı øetìzec odpovídá vzoru. Pøi nalezení shody vrací \textit{true}, v opaèném pøípadì \textit{false}.
+
+   \item \textit{RegExp.prototype.exec()}, která vrací nalezenou èást øetìzce odpovídající zadanému vzoru. A to v podobì pole. V pøípadì, e nenajde ádnou shodu, vrací \textit{null}. Stejného vısledku docílíme i metodou \textit{String.prototype.match()}. Ta navíc umoòuje vloit jako parametr jak objekt RexExp tak i regulární vıraz v typu string.\cite{16}
+	
+\end{itemize}
+
+\begin{lstlisting}
+//Metoda zjišuje shodu zadaného vırazu (str) a vzorem (re)
+	function zjistitShodu(re,str){
+	
+	//zjistí se, zda danı text odpovídá vzoru
+	if(re.test(str)){
+	
+		//vrací substring odpovídající vzoru
+		var newstr = str.match(re);
+		
+		//pouití RegExp.prototype.exec()
+		//var newstr = re.exec(str);
+		
+		console.log(newstr);
+	}else{
+		console.log("ádná shoda");
+	}
+};
+	\end{lstlisting}
+
+Napøíklad pøi zadání regulárního vırazu: \verb|[12][0-9]{3}| a øetìzce \uv{v roce 1990}, vıøe uvedená metoda vypíše do konzole: \verb|['1990',index: 7,input: 'v roce 1990']|. Na první pozici se nachází èást øetìzce odpovídající vzoru. Index znaèí pozici, na které se nachází \uv{1990}. Input pak ukazuje vloenı øetìzec.
+
+Pro nahrazení èásti øetìzce odpovídající danému vzoru, slouí metoda \textit{String.prototype.replace()}. Metoda vrací novı øetìzec tvoøenı pùvodním øetìzecem s nahrazenımi èástmi. Jako parametr mùe bıt pouit, jak regulární vıraz ve tvaru øetìzce (string), tak i jako objekt RegExp. Druhım parametrem je nahrazující øetìzec, kterı mùe bıt zadán jako string nebo jako metoda, která se zavolá pøi kadém pouití daného regulárního vırazu.. \cite{17}
+
+\begin{lstlisting}
+//metoda slouí k nahrazení èásti zadaného øetìzce (str), která odpovídá regulárnímu vırazu (reg)
+//øetìzcem "repl"
+function nahradit(reg,str,repl){
+//zjistí, zda danı øetìzec odpovídá vzoru
+	if(reg.test(str)){
+		//nahradí zadanı text
+		var newstr = str.replace(reg,repl);
+		console.log(newstr);
+		main();
+	}else{
+		console.log("ádná shoda");
+		main();
+	}
+};
+\end{lstlisting}
+
+Metoda \textit{replace()} neumoòuje vkládat vlajeèky jako parametr. Toto omezení lze obejít vyuitím RegExp objektu. Na zachycené èásti textu (viz. podkapitola Zachycení), se lze odkazovat pomocí \verb|$d|, kde d pøedstavuje èíslo dané skupiny.\cite{17} 
+
+
 %jazyky s knihovnami
 \chapter{Jazyky s knihovnami}
 \section{C\#}
@@ -512,8 +570,14 @@ String vysledek = m.replaceAll("$2 $1");
 
 \bibitem[14]{14} Supported Scripts. UNICODE, INC. \emph{The Unicode Standard} [online]. 2015-06-12 [cit. 2015-07-25]. Dostupné z: \verb|http://unicode.org/standard/supported.html|
 
+\bibitem[18]{18} ROBBINS, Arnold D. \textit{GAWK: Effective AWK Programming} [online]. Edition 4.1. USA: Free Software Foundation, 2015 [cit. 2015-07-28]. ISBN 1-882114-28-0. Dostupné z: \verb|http://www.gnu.org/software/gawk/manual/gawk.pdf|
+
+
 \bibitem[16]{16}Regular Expressions. MOZILLA. Mozilla Developer Network [online]. 2015-07-21 [cit. 2015-07-26]. Dostupné z: \verb|https://developer.mozilla.org/en-US/docs/Web/JavaScript/|
 \verb|Guide/Regular_Expressions|
+
+\bibitem[17]{17}String.prototype.replace(). MOZILLA. Mozilla Developer Network [online]. 2015-07-13 [cit. 2015-07-27]. Dostupné z:\verb|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/|
+\verb|Global_Objects/String/replace|
 
 \bibitem[15]{15} Class Matcher. ORACLE. \emph{Java™ Platform Standard Ed. 8 Documentation} [online]. 2015 [cit. 2015-07-25]. Dostupné z: \verb|https://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html|
 

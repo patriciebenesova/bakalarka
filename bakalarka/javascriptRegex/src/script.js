@@ -1,4 +1,4 @@
-var babel = require("babel");
+//var babel = require("babel");
 //interface pro readline
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -53,6 +53,7 @@ function zjistitShodu(re,str){
 	if(re.test(str)){
 		//vrací substring odpovídající vzoru
 		var newstr = str.match(re);
+		//var newstr = re.exec(str);
 		console.log(newstr);
 		main();
 	}else{
