@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,12pt]{scrreprt}
 \usepackage[cp1250]{inputenc}
 \usepackage[czech]{babel}
@@ -187,9 +188,9 @@ PCRE       & \verb|\i |      \\ \hline
 
 
 \section{Metaznaky}
-Kromì alfanumerických znakù se v regulárních výrazech používají tzv. metaznaky. Metaznak má v regulárním výrazu speciální funkci a je jich celkem 12: \verb|$()*+.?[\^{| \textbf{$\vert$}. Regulární výraz tyto metaznaky nerozpozná jako obyèejné alfanumerické znaky. Pro rozpoznání nìkterého z výše uvedených znakù jako takových je tøeba potlaèit jejich funkci použitím zpìtného lomítka \textbf{\textbackslash} (tzv. escape). Znaky \verb|]| a \verb|}| není potøeba zapisovat se zpìtným lomítkem, výjimkou jsou pouze pøípady, kdy následují za \verb|[| nebo \verb|{| bez zpìtného lomítka.
+Kromì alfanumerických znakù se v regulárních výrazech používají tzv. metaznaky. Metaznak má v regulárním výrazu speciální funkci a je jich celkem 12: \verb|$()*+.?[\^{| \textbf{$\vert$}. Regulární výraz tyto metaznaky nerozpozná jako obyèejné alfanumerické znaky. Pro rozpoznání nìkterého z výše uvedených znakù jako takových je tøeba potlaèit jejich funkci použitím zpìtného lomítka \textbf{\textbackslash} (tzv. escape). Znaky \verb|]| a \verb|}| není potøeba zapisovat se zpìtným lomítkem, výjimkou jsou pouze pøípady, kdy následují za \verb|[| nebo \verb|{| bez zpìtného lomítka. Jazyk AWK navíc vyžaduje i escapování dvojitých uvozovek \verb|\"| a lomítka \verb|\/|. Nìkteré verze AWK navíc dovolují použít znaky \verb|*+?| bez zpìtného lomítka. Pøi escapování jiného znaku než výše uvedené, vetšina jazykù bere následující znak jako znak a ne metaznak. 
 
-Metaznak \uv{.} (teèka) zachytí jakýkoliv znak kromì znaku konce øádky. Toto pravidlo platí v jazycích Java, Javascript, Perl,PCRE,.NET nebo Python. Nicménì konec øádky lze tìèkou zachytit použitím \uv{single line} módu (\uv{dot all} módu). Tuto možnost ovšem nelze využít v jazyce Javascript. \cite[s.34--36]{5}
+Metaznak \uv{.} (teèka) zachytí jakýkoliv znak kromì znaku konce øádky. Toto pravidlo platí v jazycích Java, Javascript, Perl,PCRE,.NET nebo Python. Nicménì konec øádky lze tìèkou zachytit použitím \uv{single line} módu (\uv{dot all} módu). Tuto možnost ovšem nelze využít v jazyce Javascript. \cite[s.34--36]{5} Jazyk AWK podporuje mód multiline automaticky.
 Jak daný mód zapnout, lze zjistit z tabulky 2.
 
 \begin{table}[h]
@@ -369,7 +370,24 @@ Regulární výrazy také umožòují zachycené skupiny pojmenovávat a pak na nì odkazo
 AWK je jak poèítaèovým programem, tak i programovacím jazykem, který umožòuje daný program ovládat. Je zahrnut témìø ve všech UNIX systémech. Slouží zejména ke zpracování textových dat. K tomu hojnì využívá regulární výrazy.
 
 \subsection{Syntaxe}
-Jazyk AWK se vyznaèuje hned nìkolika odlištnostmi od ostatních modifikací regulárních výrazù. Regulární výraz se zapisuje mezi dvì lomítka \verb|(\ ... \)|. 
+Jazyk AWK se vyznaèuje hned nìkolika odlištnostmi od ostatních modifikací regulárních výrazù. Regulární výraz se zapisuje mezi dvì lomítka \verb|(\ ... \)|. AWK umožòuje porovnávání øetìzcù pomocí operátorù \verb|~| a \verb|!~|. Syntaxe \verb|pozice ~ /regVyraz/| umožòuje vyhledat všechny výrazy, které odpovídají vzoru. \verb|pozice ~! /regVyraz/| umožòuje naopak najít všechny výrazy na dané pozici, které vzoru neodpovídají. \cite[s.45]{18}
+
+Další odlišností, která nebyla v pøechozím textu zmínìna, je používání odlišný zktratek pro tøídu znakù. AWK umožòuje používat tøídu znakù definovanou POSIX standardem, pomocí \verb|[:nazevTridy:]|. Seznam níže uvádí pøehled názvù tøíd a jejich popis. \cite[s.51]{18}
+\begin{itemize}
+\item \verb|[:alnum:]| veškeré alfanumerické znaky
+\item \verb|[:alpha:]| veškeré znaky písmen
+\item \verb|[:blank:]| mezera a tabulátor
+\item \verb|[:cntrl:]| control znaky
+\item \verb|[:digit:]| èísla
+\item \verb|[:graph:]| tištitelné a viditelné znaky napø. \uv{k}
+\item \verb|[:lower:]| malá písmena
+\item \verb|[:print:]| tištitelné znaky
+\item \verb|[:punct:]| interpunkce, která nespadá ani do jedné z výše uvedených skupin
+\item \verb|[:upper:]| kapitálky
+\item \verb|[:xdigit:]| znaky v hexadecimálním tvaru
+\end{itemize}
+
+
 \section{Javascript}
 \subsection{Obecné informace}
 Javascript je objektovì orientovaný jazyk, používaný jako skriptovací jazyk pro webové stránky. Nicménì je spustitelný i v nástroji node.js. Standardem pro Javascript je ECMAScript. Nejnovìjší verzí je ECMAScript 6 (neboli ECMA--262 6. edice) vydaná v roce 2015. Ovšem není podporován všemi internetovými prohlížeèi ani nástrojem node.js, proto se v této kapitole budu držet syntaxe standardizovaném ECMAScript 5.1, která je plnì podporována.
