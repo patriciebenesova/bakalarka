@@ -126,7 +126,7 @@ Obsahuje zamìøení a hlavní cíl práce, zpùsob dosažení cíle, pøínos práce (vlastn
 \setcounter{page}{1}
 
 \chapter{Historie}
-V roce 1956 americký matematik a logik Stephen Cole Kleene popsal koneèné deterministické automaty (DFA), které rozpoznávají formální jazyk. Jazyk rozpoznatelný koneèným automatem se poté nazývá regulárním jazykem.\cite{1}
+V roce 1956 americký matematik a logik Stephen Cole Kleene popsal koneèné deterministické automaty (DFA), které rozpoznávají formální jazyk. Jazyk rozpoznatelný koneèným automatem se poté nazývá regulárním jazykem, protože se vyznaèuje \uv{pravidelností} (regularitou)\cite{1}
 
 Na Kleeneho v roce 1968 navázal programátor, známý pøedevším díky operaènímu systému Unix, Kenneth Thomson. Publikoval èlánek \uv{Regular Expression Search Algorithm}\cite{2}, ve kterém popsal algoritmus pro vyhledávání pomocí regulárních výrazù v textu.
 
@@ -143,7 +143,7 @@ Dnes jsou regulární výrazy podporovány v mnoha jazycích a textových editorech ja
 Regulární výrazy nemají pøesnou definici, nicménì dají se popsat jako textové øetìzce, které slouží jako vzor pro vyhledávání ve strukturovaném nebo nestrukturovaném textu. Dalším pøípadem užití mùže být nahrazování èi rozdìlování textu. 
 
 Jak již bylo zmínìno v pøedchozí kapitole, jsou využívány v mnoha aplikacích a programovacích jazycích a jejich knihovnách.
-\cite[s.1--3]{5} Jejich implementace není ale ve všech jazycích stejná, a proto budu v následujícím textu uvádìt odlišnosti syntaxe regulárních výrazù ve vybraných jazycích.
+\cite[s.1--3]{5} Jejich implementace není ale ve všech jazycích stejná, a proto budu v následujícím textu uvádìt odlišnosti syntaxe regulárních výrazù ve vybraných jazycích (tzv.\uv{pøíchutì} regulárních výrazù).
 
 Existují rùzné desctopové i webové aplikace, které umožòují rozpoznávání regulárních výrazù v rùzných jazycích, èímž umožòují ovìøení správnosti zadaného výrazu. Mezi webové aplikace patøí napøíklad:
 \begin{itemize}
@@ -154,13 +154,13 @@ Z desktopových aplikací bych uvedla napøíklad \uv{The Regex Couch}, který lze st
 \section{Literály a jejich øetìzení}
 Øetìzení umožòuje spojit jednotlivé znaky do skupin. Napøíklad regulárnímu výrazu: \texttt{abc} vyhoví jakýkoli øetìzec, který obsahuje danou skupinu na libovolném místì. Regulární výraz tedy vyhoví napøíklad øetìzcùm:\uv{jkl\textbf{abc}jdabd}nebo \uv{\textbf{abc}ccccd}, ale nenajde shodu v øetìzci: \uv{ajbc}. 
 
-Jak toto vyhledávání funguje vystvìtlím na následujícím pøíkladu. Mìjme již výše uvedený regulární výraz \texttt{abc} a øetìzec:\uv{kaabc}. Pøi vyhledávání se zaèíná zleva a postuje se po jednotlivých znacích. Nejprve se vezme znak \uv{k}, na kterém regulární výraz selže, protože první znak výrazu je \uv{a}. Proto pokraèuje dalším znakem, což je znak \uv{a}. Zde regulární výraz uspìje. Poté ovšem selže na tøetím znaku øetìzce \uv{a}, jelikož dalším znakem ve výrazu je znak \uv{b}. Provede se tedy tzv. \uv{backtracking}, což znamená, že regulární výraz nepøejde na ètvrtý znak, ale zaène porovnávat regulární výraz od zaèátku s tøetím znakem øetìzce \uv{a}. Zde najde shodu jelikož prvním znakem výrazu je \uv{a}. Poté pokraèuje v porovnávání ètvrtého znaku øetìzce \uv{b} se znakem \uv{b} regulárního výrazu, zde opìt najde shodu. Podobnì najde shodu i pøi znaku \uv{c}.\cite{6}
+Jak toto vyhledávání funguje vystvìtlím na následujícím pøíkladu. Mìjme již výše uvedený regulární výraz \texttt{abc} a øetìzec:\uv{kaabc}. Pøi vyhledávání se zaèíná zleva a postuje se po jednotlivých znacích. Nejprve se vezme znak \uv{k}, na kterém regulární výraz selže, protože první znak výrazu je \uv{a}. Proto øetìzec zkrátí o první znak a pokraèuje dalším znakem, což je znak \uv{a}. Zde regulární výraz uspìje. Poté ovšem selže na tøetím znaku øetìzce \uv{a}, jelikož dalším znakem ve výrazu je znak \uv{b}. Provede se tedy tzv. \uv{backtrack}, což znamená, že regulární výraz nepøejde na ètvrtý znak, ale zaène porovnávat regulární výraz od zaèátku s tøetím znakem øetìzce \uv{a}. Zde najde shodu jelikož prvním znakem výrazu je \uv{a}. Poté pokraèuje v porovnávání ètvrtého znaku øetìzce \uv{b} se znakem \uv{b} regulárního výrazu, zde opìt najde shodu. Podobnì najde shodu i pøi znaku \uv{c}.\cite{6}
 
 Názornì tento proces lze vidìt na obrázku 1.
 \begin{figure}[h!]
 	\centering
 		\includegraphics[scale = 1]{backtracking.PNG}
-	\caption{Backtracking}
+	\caption{Backtrack}
 	\label{fig:obr1}
 \end{figure}
 
@@ -178,7 +178,7 @@ Jaké èásti regulárních výrazù, popø. tøíd je potøeba použít v daném jazyce, lze 
 \multicolumn{2}{|l|}{Case insensitive}                                                                  \\ \hline
 Java       & \begin{tabular}[c]{@{}l@{}}Pattern.CASE\_INSENSITIVE\\ nebo (?i)\end{tabular}            \\ \hline
 Perl       & \verb|\i |                                                                               \\ \hline
-AWK        & \begin{tabular}[c]{@{}l@{}}IGNORECASE = 0\\ (zajistí zapnutí módu globálnì)\end{tabular} \\ \hline
+AWK        & \begin{tabular}[c]{@{}l@{}}IGNORECASE = 0\\ (zajistí zapnutí módu globálnì v gawk)\end{tabular} \\ \hline
 Javascript & \verb|\i |                                                                                \\ \hline
 PCRE       & \verb|\i |      \\ \hline                                                                                  
 \end{tabular}
@@ -188,7 +188,7 @@ PCRE       & \verb|\i |      \\ \hline
 
 
 \section{Metaznaky}
-Kromì alfanumerických znakù se v regulárních výrazech používají tzv. metaznaky. Metaznak má v regulárním výrazu speciální funkci a je jich celkem 12: \verb|$()*+.?[\^{| \textbf{$\vert$}. Regulární výraz tyto metaznaky nerozpozná jako obyèejné alfanumerické znaky. Pro rozpoznání nìkterého z výše uvedených znakù jako takových je tøeba potlaèit jejich funkci použitím zpìtného lomítka \textbf{\textbackslash} (tzv. escape). Znaky \verb|]| a \verb|}| není potøeba zapisovat se zpìtným lomítkem, výjimkou jsou pouze pøípady, kdy následují za \verb|[| nebo \verb|{| bez zpìtného lomítka. Jazyk AWK navíc vyžaduje i escapování dvojitých uvozovek \verb|\"| a lomítka \verb|\/|. Nìkteré verze AWK navíc dovolují použít znaky \verb|*+?| bez zpìtného lomítka. Pøi escapování jiného znaku než výše uvedené, vetšina jazykù bere následující znak jako znak a ne metaznak. 
+Kromì alfanumerických znakù se v regulárních výrazech používají tzv. metaznaky. Metaznak má v regulárním výrazu speciální funkci a je jich celkem 12: \verb|$()*+.?[\^{| \textbf{$\vert$}. Regulární výraz tyto metaznaky nerozpozná jako obyèejné alfanumerické znaky. Pro rozpoznání nìkterého z výše uvedených znakù jako takových je tøeba potlaèit jejich funkci použitím zpìtného lomítka \textbf{\textbackslash} (tzv. escape). Znaky \verb|]| a \verb|}| není potøeba zapisovat se zpìtným lomítkem, výjimkou jsou pouze pøípady, kdy následují za \verb|[| nebo \verb|{| bez zpìtného lomítka. Jazyk AWK navíc vyžaduje i escapování dvojitých uvozovek \verb|\"| a lomítka \verb|\/|. Nìkteré verze AWK navíc dovolují použít znaky \verb|*+?| bez zpìtného lomítka jako literály v pøípadì, že se nevyskytují na místì kvantifikátoru (viz. kapitola Kvantifikátory). Pøi escapování jiného znaku než výše uvedené, vetšina jazykù bere následující znak jako literál a ne jako metaznak. 
 
 Metaznak \uv{.} (teèka) zachytí jakýkoliv znak kromì znaku konce øádky. Toto pravidlo platí v jazycích Java, Javascript, Perl,PCRE,.NET nebo Python. Nicménì konec øádky lze tìèkou zachytit použitím \uv{single line} módu (\uv{dot all} módu). Tuto možnost ovšem nelze využít v jazyce Javascript. \cite[s.34--36]{5} Jazyk AWK podporuje mód multiline automaticky.
 Jak daný mód zapnout, lze zjistit z tabulky 2.
@@ -231,12 +231,18 @@ PCRE       & \verb|\m|                                                          
 
 Kulaté závorky () slouží pro zachycení èásti regulárního výrazu. Toto má celou øadu využití napøíklad za úèelem alternace, nahrazení, opakování apod. Podrobnìji se kulatými závorkami budu vìnovat v kapitole Zachycení (capture).
 
-Metaznak \textbf{$\vert$} znaèí alternaci neboli logické nebo. Pro pøíklad regulární výraz (a$\vert$A)bc uspìje jak na øetìzci \uv{abc} nebo na øetìzci \uv{Abc}. V pøípadì že bychom kulaté závorky vynechali, regulární výraz a$\vert$Abc by uspìl buï na øetìzci \uv{a} nebo \uv{Abc}.
+Metaznak \textbf{$\vert$} znaèí alternaci neboli logické \uv{nebo}. Pro pøíklad regulární výraz \verb!(a|A)bc! uspìje na øetìzci \uv{abc} nebo na øetìzci \uv{Abc}. V pøípadì že bychom kulaté závorky vynechali, regulární výraz \verb!a|Abc! uspìje buï na øetìzci \uv{a} nebo \uv{Abc}.
 
 \subsection{Tøída znakù}
-Velmi užiteèná je také tøída znakù \verb|[]|. Tøída znakù slouží k rozpoznání libovolného znaku nebo nìkolika znakù uvnitø hranatých závorek. Regulární výraz \verb|[abc]| zachytí buï \uv{a} nebo \uv{b} nebo \uv{c}. Uvnitø tøídy znakù lze používat všechny metaznaky krom \verb|^\-| a \verb|]| bez zpìtného lomítka, jelikož uvnitø hranatých závorek ztrácejí svojí speciální funkci. V jazycích Java a .NET mezi metaznaky v tøídì znakù patøí také \verb|[|. Znak \verb|^| uvnitø tøídy znakù znaèí logické NOT, èili regulární výraz: \verb|a[^abc]c| uspìje na øetìzci \uv{\textbf{adc}}, ale selže na \uv{abc}. Je tøeba brát v potaz, že v regulárním výrazu \verb|[a^bc]|, kde není \verb|^| na prvním místì, se \verb|^| chová jako literál. Znak - je mimo hranaté závorky literál, ovšem uvnitø hranatých závorek slouží k zapsání tøídy znakù jako interval. Regulární výraz: \verb|[0-9A-z]*| uspìje na øetìzci \uv{\textbf{A9g}}, ale selže na \uv{è} jelikož implicitnì jsou rozeznány pouze znaky z ASCII tabulky.  Toto platí pouze v pøípadì, že se nenachází hned za uvozující závorkou tzn.\verb|[-a]| nebo hned pøed uzavírající závorkou tzn.\verb|[a-]|. V uvedených pøíkladech se pak - chová jako literál.\cite[s.31--32]{5} 
+Velmi užiteèná je také tøída znakù \verb|[]|. Tøída znakù slouží k rozpoznání libovolného znaku nebo nìkolika znakù uvnitø hranatých závorek. Regulární výraz \verb|[abc]| zachytí buï \uv{a} nebo \uv{b} nebo \uv{c}. Uvnitø tøídy znakù lze používat všechny metaznaky krom \verb|^\-| a \verb|]| bez zpìtného lomítka, jelikož uvnitø hranatých závorek ztrácejí svojí speciální funkci. V jazycích Java a .NET mezi metaznaky v tøídì znakù patøí také \verb|[|.[s.31--32]{5}
 
-Jako zjednodušení pro výše popsanou tøídu znakù, existují zkratky. Znak \verb|\w| je ekvivalentní s \verb|[A-Za-z0-9_]| a to vždy v jazyce Java, Javascript a PCRE. Jazyky .NET a Perl umožòují \verb|\w| zachytit i znaky mimo ASCII tabulku (z èeských znakù napø. ý,á,í nebo é). 
+To proto, že tøída znakù v jazyce Java také umožòuje intersekce. Syntaxe intersekcí je následující: \verb|[tøída&&[intersekce]]|. Pomocí intersekce je možné napøíklad vynechat nìkteré znaky, které by jinak zahrnoval interval. Regulární výraz \verb|[ac-fh-qs-y]| tak mùžeme zapsat následovnì: \verb|[a-z&&[^bgrz]]|.\cite{9}
+ 
+NEMELO BY JIT [A-z]
+
+Znak \verb|^| uvnitø tøídy znakù znaèí negaci, èili regulární výraz: \verb|a[^abc]c| uspìje na øetìzci \uv{\textbf{adc}}, ale selže na \uv{abc}. Je tøeba brát v potaz, že v regulárním výrazu \verb|[a^bc]|, kde není \verb|^| na prvním místì, se \verb|^| chová jako literál. Znak - je mimo hranaté závorky literál, ovšem uvnitø hranatých závorek slouží k zapsání tøídy znakù jako interval. Regulární výraz: \verb|[0-9A-z]*| uspìje na øetìzci \uv{\textbf{A9g}}, ale selže na \uv{è} jelikož implicitnì jsou rozeznány pouze znaky z ASCII tabulky.  Toto platí pouze v pøípadì, že se nenachází hned za uvozující závorkou tzn.\verb|[-a]| nebo hned pøed uzavírající závorkou tzn.\verb|[a-]|. V uvedených pøíkladech se pak - chová jako literál.\cite[s.31--32]{5} 
+
+Jako zjednodušení pro výše popsanou tøídu znakù, existují zkratky tzv.\uv{tokeny}. Znak \verb|\w| je ekvivalentní s \verb|[A-Za-z0-9_]| a to v jazyce Java, Javascript a PCRE. Jazyky .NET a Perl umožòují \verb|\w| zachytit i znaky mimo ASCII tabulku (z èeských znakù napø. ý,á,í nebo é). 
 
 K tøídì znakù \verb|[0-9]| je ekvivalentní znak \verb|\d|. 
 
@@ -244,9 +250,8 @@ Dalším používaným znakem je  bílý znak \verb|\s|. Bílým znakem rozumíme znak, kt
 
 Pro získání negace znakù \verb|\w|, \verb|\d| a \verb|\s|, používáme velká písmena \verb|\W|,\verb|\D| a \verb|\S|.
 
-Pro zachycení znakù na zaèátku nebo konci slova lze použít znak \verb|\b|. Napøíklad regulární výraz \verb|\ba..g\b| uspìje na øetìzci \uv{\textbf{assg}}, ale selže pøi rozpoznání \uv{abbc}. Znak \verb|\B| hledá pozice, které jsou: pøed prvním nebo za posledním znakem slova (pokud posledním znak není znak slova), mezi dvìma znaky slova nebo jinými znaky, a prázdný øetìzec. Nicménì v jazycích Javascript, Perl,.NET, PCRE a Python zachytí pozici mezi znaky rozpoznanými \verb|\w| a \verb|\W|. Javascript a PCRE rozeznají pouze ASCII znaky, .NET, Java a Perl rozeznají jakékoliv znaky. Python umožòuje rozeznat i jiné než ASCII znaky, pokud použijeme Unicode flag.\cite[s.42--43]{5}
+Pro zachycení znakù na zaèátku nebo konci slova lze použít znak \verb|\b|. Napøíklad regulární výraz \verb|\ba..g\b| uspìje na øetìzci \uv{\textbf{assg}}, ale selže pøi rozpoznání \uv{abbc}. Znak \verb|\B| hledá pozice, které jsou: pøed prvním nebo za posledním znakem slova (pokud posledním znak není znak slova), mezi dvìma znaky slova nebo jinými znaky, a prázdný øetìzec. Pøíchutì v jazycích Javascript, Perl,.NET, PCRE a Python zachytí pozici mezi znaky rozpoznanými \verb|\w| a \verb|\W|. Javascript a PCRE rozeznají pouze ASCII znaky, .NET, Java a Perl rozeznají jakékoliv znaky. Python umožòuje rozeznat i jiné než ASCII znaky, pokud použijeme Unicode flag.\cite[s.42--43]{5}
 
-Tøída znakù v jazyce Java také umožòuje intersekce. Syntaxe intersekcí je následující: \verb|[tøída&&[intersekce]]|. Pomocí intersekce je možné napøíklad vynechat nìkteré znaky, které by jinak zahrnoval interval. Ragulární výraz \verb|[ac-fh-qs-y]| tak mùžeme zapsat následovnì: \verb|[a-z&&[^bgrz]]|.\cite{9}
 
 \subsection{Kvantifikátory}
 Další skupinou metaznakù jsou kvantifikátory umožòující opakování znaku nebo skupiny znakù zachycenou v kulatých závorkách ().
@@ -259,8 +264,8 @@ Kvantifikátory a interval poètu opakování lze vidìt v tabulce 4.
 \begin{tabular}{|c|c|}
 \hline
 Kvantifikátor & Poèet opakování \\ \hline
-\verb|*| & \textless 0;) \\ \hline
-\verb|+| & \textless 1;) \\ \hline
+\verb|*| & \textless 0;\infty) \\ \hline
+\verb|+| & \textless 1;\infty) \\ \hline
 \verb|?| & 0 nebo 1\\ \hline
 \end{tabular}
 \end{table}
@@ -270,33 +275,25 @@ Složené závorky \verb|{}| též slouží jako kvantifikátor. Umožòují zadat pøesný p
 \subsection{Hladové vs. líné kvantifikátory}
 Všechny výše uvedené kvantifikátory jsou implicitnì nastaveny jako \uv{žravé} (anglicky \uv{greedy}). To znamená, že kvantifikátor pohltí, co nejvíce znakù, za kterými je umístìn. Toto chování vysvìtlím na pøíkladì.
 
-Mìjme regulární výraz \verb|a*abc| a textový øetìzec \uv{aaaabc}. Kvantifikátor \verb|*| nejprve pohltí veškeré znaky \uv{a}. Poté se pøejde na znak \uv{a} umístìný za kvantifikátorem. Na tomto znaku, ale selže, jelikož dalším znakem øetezce je znak \uv{b}. Proto se provede \mbox{\uv{backtracking}}(viz. ...), tak že postupnì odebírá odzadu znaky, které pohltil kvantifikátor. Tím se vrátí na pozici za tøetím \uv{a} a znovu ovìøí, zda další znak je \uv{a}. Regulární výraz zde uspìje a pokraèuje znaky \uv{b} a \uv{c}. Nakonec tedy ragulární výraz na daném øetìzci uspìje. \cite[s.68]{5}
+Mìjme regulární výraz \verb|.*abc| a textový øetìzec \uv{aabcaabc}. Kvantifikátor \verb|*| nejprve pohltí veškeré znaky øetìzce. Poté se bude snažit najít další znak \uv{a}. Na tomto znaku, ale selže, jelikož v øetìzci už nezbývá žádný další znak. Proto se provede \mbox{\uv{backtracking}}, tak že postupnì odebírá odzadu znaky, které pohltil kvantifikátor. To je možné díky tomu, že si zapamatovává pozice pohlcených znakù. Tím se vrátí na pozici \uv{c} a znovu ovìøí, zda znak na dané pozici je \uv{a}. Zde selže, proto vrátí znak \uv{b}. Opìt selže a pokraèuje znakem \uv{a}. Regulární výraz zde uspìje a pokraèuje znaky \uv{b} a \uv{c}. Nakonec tedy regulární výraz na daném øetìzci uspìje. \cite[s.68]{5}
 
-Názornì daný proces mùžeme vidìt na obrázku 2.
+\uv{Žravé} chování kvantifikátorù mùžeme zmìnit na \uv{líné} (anglicky \uv{lazy}), tak že na kvantifikátor pøidáme \uv{?}. Dostaneme tedy \verb|*?|,\verb|+?|,\verb|??| a \verb|{}?|. Po zmìnì kvantifikátoru na lazy ve výše uvedeném regulárním výrazu, zíkáme \verb|.*?abc|. Nyní se na øetìzci \uv{aabcaabc} provádí po každém uspìšném rozeznání znaku \uv{a} \uv{backtracking}, aby se ovìøilo zda na následujících pozicích není \uv{b} a \uv{c}. \uv{Líný} kvantifikátor tak opakuje znakù, co nejménì to jde. V uvedeném øetìzci tedy nalezne pouze \uv{\textbf{aabc}aabc} \cite[s.69]{5}
 
-\begin{figure}[h!]
-	\centering
-		\includegraphics{greedy.PNG}
-	\caption{Žravé kvantifikátory}
-	\label{fig:obr2}
-\end{figure}
-
-\uv{Žravé} chování kvantifikátorù mùžeme zmìnit na \uv{líné} (anglicky \uv{lazy}), tak že na kvantifikátor pøidáme \uv{?}. Dostaneme tedy \verb|*?|,\verb|+?|,\verb|??| a \verb|{}?|. Po zmìnì kvantifikátoru na lazy ve výše uvedeném regulárním výrazu, zíkáme \verb|a*?abc|. Nyní se na øetìzci \uv{aaaabc} provádí po každém uspìšném rozeznání znaku \uv{a} \uv{backtracking}, aby se ovìøilo, zda \uv{a} na dané pozici není poslední. \uv{Líný} kvantifikátor tak opakuje znakù, co nejménì to jde.\cite[s.69]{5}
-
+Na obrázku 2 lze vidìt srovnání postupu pøi rozpoznávání stejného øetìzce pomocí regulárního výrazu s liným a žravým kvantifikátorem.
 \begin{figure}[h!]
 	\centering
 		\includegraphics{lazy.PNG}
-	\caption{Líné kvantifikátory}
-	\label{fig:obr3}
+	\caption{Líný a žravý kvantifikátor}
+	\label{fig:obr2}
 \end{figure}
 
 \section{Optimalizace regulárních výrazù}
 Optimalizace regulárních výrazù spoèítá v redukci poètu krokù, provedených pøi vyhodnocování regulárního výrazu. Následující metody mohou optimalizovat regulární výrazy zejména v pøípadech, kdy má regulární výraz na daném øetìzci selhat.\cite[s.45]{6}
 \subsection{Posesivní kvantifikátory}
-Jak bylo možné vidìt na obrázku 2 a obrázku 3, \uv{žravé} i \uv{líné} chování kvantifikátorù vyžaduje mnohdy pøebyteèný backtracking. Tomu lze pøedejít použitím posesivních kvantifikátorù. Ty dostaneme pøidáním \verb|+| za kvantifikátor, tedy: \verb|*+|,\verb|++|,\verb|?+| a \verb|{}+|. Jsou podporovány pouze v jazycích Java (od verze 4), PCRE a Perl (od verze 5.10).
+Jak bylo možné vidìt na obrázku 2, \uv{žravé} i \uv{líné} chování kvantifikátorù vyžaduje mnohdy pøebyteèný backtracking. Tomu lze pøedejít použitím posesivních kvantifikátorù. Ty dostaneme pøidáním \verb|+| za kvantifikátor, tedy: \verb|*+|,\verb|++|,\verb|?+| a \verb|{}+|. Jsou podporovány pouze v jazycích Java (od verze 4), PCRE a Perl (od verze 5.10).
 
-Posesivní kvantifikátor se chová podobnì jako \uv{žravý}, ovšem po pohlcení všech možných výskytù daného znaku, již neprovádí backtracking a žádný již pohlcený znak nevrací. Nezapamatovává si totiž pozice. Stejný regulární výraz jako v pøedchozích pøípadech, pøi použití posesivního kvantifikátoru, \verb|a*+abc| pak na øetìzci \uv{aaaabc} neuspìje.
-Kvantifikátor totiž pohltí všechna \uv{a} v øetìzci a pøi porovnávání dalšího \uv{a} za kvantifikátorem selže, protože se neprovede backtracking na poslední vzaté \uv{a}. (viz. obrázek 4).\cite[s.70-71]{5}
+Posesivní kvantifikátor se chová podobnì jako \uv{žravý}, ovšem po pohlcení všech možných výskytù daného znaku, již neprovádí backtracking a žádný již pohlcený znak nevrací. Nezapamatovává si totiž pozice. Stejný regulární výraz jako v pøedchozích pøípadech, pøi použití posesivního kvantifikátoru, \verb|.*+abc| pak na øetìzci \uv{aaaabc} neuspìje.
+Kvantifikátor totiž pohltí všechny znaky v øetìzci a pøi porovnávání znaku \uv{a} za kvantifikátorem selže, protože se neprovede backtracking. (viz. obrázek 4).\cite[s.70-71]{5}
 
  \begin{figure}[h!]
 	\centering
@@ -322,21 +319,21 @@ Atomické seskupování není podporováno v jazyce Javascript.
 \end{figure}
 
 \section{UNICODE vlastnosti}
-Unicode Standard a ISO/IEC 10646 podporují UTF--8, UTF--16 a UTF--32.\cite{11} Což umožòuje pøevést libovolné znaky do standardizovaného kódu?????. Je podporováno mnoha jazyky vèetnì Javascriptu dle normy ECMAScript 6, nicménì AWK jej nepodporuje.
+Unicode Standard a ISO/IEC 10646 podporují UTF--8, UTF--16 a UTF--32.\cite{11} Což umožòuje pøevést libovolné znaky do strojovì èitelného textu. Nejnovìjší verzí standardu Unicode je verze 8.0. Je podporováno mnoha jazyky vèetnì Javascriptu dle normy ECMAScript-262 6. edice, nicménì AWK jej nepodporuje.
 
-Pro unicodové znaky (tzv. grafémy) mohou mít napøíklad tvar \verb|\u2122|, což je podporovaný tvar jazyky Javascript a Java (za pøedpokladu zapnutí módu unicode \verb|\u|), nebo \verb|\x{2122}| podporované jazykem Perl nebo PCRE. Tvar \verb|\u+0000| umožòuje použít právì 4 hexa èíslice, zatímco \verb|\x{00}| umožòuje použít pøáì tolik hexa èíslic, kolik je potøeba.
+Pro unicodové znaky (tzv. grafémy) mohou mít napøíklad tvar \verb|\u2122|, což je podporovaný tvar jazyky Javascript a Java (za pøedpokladu zapnutí módu unicode \verb|\u|), nebo \verb|\x{2122}| podporované jazykem Perl nebo PCRE. Tvar \verb|\u+0000| umožòuje použít právì 4 hexa èíslice, zatímco \verb|\x{00}| umožòuje použít pøávì tolik hexa èíslic, kolik je potøeba.
 
 V regulárních výrazech mùžeme použít i unicodové vlastnosti (anglicky property). \verb|\p{vlastnost}| pak reprezentuje jakýkoliv znak s danou vlastností ve složených závorkách. Pokud chceme její negaci použijeme \verb|\P{vlastnost}|. Tuto funkci podporuje pouze Java, Perl, PCRE a .NET. (ne Javascript ani awk)
 
 \verb|\p{L}| pøedstavuje jakékoliv písmeno z kteréhokoliv jazyka. Mùžeme tuto vlastnost doplnit \verb|\p{Lu}|, což znaèí velké písmeno nebo \verb|\p{Ll}|, co znaèí malé písmeno.
-\verb|\p{Z}| zachytí mezeru nebo neviditelný separátor. Tuto vlastnost mžeme upøesnit \verb|\p{Zs}|, což znaèí mezeru nebo \verb|\p{Zl}| znaèící separátor U+2028 èi \verb|\p{Zp}| pro separátor U+2029.
+\verb|\p{Z}| zachytí mezeru nebo neviditelný separátor. Tuto vlastnost mùžeme upøesnit \verb|\p{Zs}|, což znaèí neviditelný prázdný znak nebo \verb|\p{Zl}| znaèící oddìlovaè øádkù U+2028 èi \verb|\p{Zp}| pro oddìlovaè odstavcù U+2029.
 Pro matematické symboly, znaky mìn apod. mùžeme použít \verb|\p{S}|. Pro èísla existuje vlastnost \verb|\p{N}|, která zachytí veškerá èísla od 0 do 9 i øímské èíslice.
-Interpunkci (tzn. teèka, èárka, uvozovky, závorky apod..) je možné zachytit pomocí \verb|\p{P}|. Pro teèku a èárku mùžeme použít \verb|\p{Pd}|, pro úvodní závorku \verb|\p{Ps}| a uzavírající závorku \verb|\p{Pe}|. \cite[s.45-47]{5}
+Interpunkci (tzn. teèka, èárka, uvozovky, závorky apod..) je možné zachytit pomocí \verb|\p{P}|. Pro teèku a èárku mùžeme použít \verb|\p{Pd}|, pro otevírací závorku \verb|\p{Ps}| a uzavírající závorku \verb|\p{Pe}|. \cite[s.45-47]{5}
 
-Unicode bloky jsou tvoøeny seskupenými unicodovými znaky. Jsou podporovány pouze v jazyce Perl, .NET a Java. Syntaxe \verb|\p{nazev_bloku}| se ovšem v rùzných jazycích mùže lišit. Java používá vždy pøed názvem bloku ve složených závorkách \uv{In} (napø. \verb|\p{InBasicLatin}|) , Perl umožòuje jak \uv{In} tak \uv{Is}. Názvù blokù je celá øada, napøíklad blok pro znaky \verb|0000..007F| se nazývá Basic\verb|_|Latin, \verb|0400..04FF| pro Cyrilici nebo \\ \verb|0600..06FF| pro Arabštinu (více viz. \cite{12}). \cite[s.44]{5}
+Unicode bloky jsou tvoøeny seskupenými unicodovými znaky. Jsou podporovány pouze v jazyce Perl, .NET a Java. Syntaxe \verb|\p{nazev_bloku}| se ovšem v rùzných jazycích mùže lišit. Java používá vždy pøed názvem bloku ve složených závorkách \uv{In} (napø. \verb|\p{InBasicLatin}|) , Perl umožòuje jak \uv{In} tak \uv{Is}. Názvù blokù je celá øada, napøíklad blok pro znaky \verb|0000..007F| se nazývá Basic\verb|_|Latin, \verb|0400..04FF| pro Cyrilici nebo \\ \verb|0600..06FF| pro arabské znaky (více viz. \cite{12}). \cite[s.44]{5}
 V jazyce Javascript jde stejného výsledku dosáhnout pomocí tøídy znakù napø. \verb|/[\u0400-\u04FF]+/|.  
 
-Synatexe pro unicode písma \verb|\p{nazev_skriptu}| je podporována v Javì (od verze 7), PCRE i Perlu. Java vyžaduje pøed názvem skriptu ještì \uv{Is} (napø. \verb|\p{IsGreek}|)\cite{13}. Názvy unicodových skriptù jsou napøíklad: \uv{Latin},\uv{Arabic},\uv{Brahmi} nebo od verze 8 také \uv{Multani}\cite{14}.
+Synataxe pro unicode písma \verb|\p{nazev_skriptu}| je podporována v Javì (od verze 7), PCRE i Perlu. Java vyžaduje pøed názvem skriptu ještì \uv{Is} (napø. \verb|\p{IsGreek}|)\cite{13}. Názvy unicodových skriptù jsou napøíklad: \uv{Latin},\uv{Arabic},\uv{Brahmi} nebo od verze 8 také \uv{Multani}\cite{14}.
 
 
 \section{Look Around}
@@ -386,6 +383,29 @@ Další odlišností, která nebyla v pøechozím textu zmínìna, je používání odlišný z
 \item \verb|[:upper:]| kapitálky
 \item \verb|[:xdigit:]| znaky v hexadecimálním tvaru
 \end{itemize}
+Tøídu znakù je nutné zapisovat do dvojitých hranatých závorek napø. \verb|[[:alpha:]]|. 
+
+AWK ète zadaný pøíkaz dvakrát. Poprvé pøeète zadaný program a podruhé vyhledá øetìzec vyhovující zadanému regulárnímu výrazu.\cite[s.53]{18}
+
+Jak již bylo zmínìno výše , AWK má implicitnì nastaven mód \uv{single line}. Pøi naèítání souboru rozdìluje vložený text do záznamù oddìlené právì znakem nové øádky \uv{\n}. Pro zmìnu separátoru mùžeme nastavit promìnnou RS na jakýkoli jiný znak.
+
+Záznamy jsou pak dále dìleny na pole, která jsou lépe programovì zpracovatelná (program si totiž zapamatovává jejich pozice pomocí poètu záznamù, které již byly pøeèteny). Separátor rozdìlující pole je buï literál nebo regulární výraz. Separátor mùžeme nastavit pomocí promìnné \uv{FS}. 
+
+\begin{lstlisting}
+echo Jimmy Weasel, 100 Any Street#Jane Weasel, 99 Same Street | awk 'BEGIN{RS="#"; FS=","} /.+/ {print $1}
+
+#vytiskne: 
+#Jimmy Weasel
+#Jane Weasel
+
+\end{lstlisting}
+
+Pro nahrazování použijeme metodu \textit{sub()}.
+
+\begin{lstlisting}
+echo abcdefg| awk '{sub(/abc/,"cba");print}'
+# vytiskne "cbadefg" 
+\end{lstlisting}
 
 
 \section{Javascript}

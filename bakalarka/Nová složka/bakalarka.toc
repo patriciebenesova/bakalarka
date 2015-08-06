@@ -12,11 +12,11 @@
 \contentsline {section}{\numberline {3.3}Metaznaky}{4}
 \contentsline {subsection}{\numberline {3.3.1}T\v r\IeC {\'\i }da znak\r u}{5}
 \contentsline {subsection}{\numberline {3.3.2}Kvantifik\'atory}{6}
-\contentsline {subsection}{\numberline {3.3.3}Hladov\'e vs. l\IeC {\'\i }n\'e kvantifik\'atory}{6}
-\contentsline {section}{\numberline {3.4}Optimalizace regul\'arn\IeC {\'\i }ch v\'yraz\r u}{8}
-\contentsline {subsection}{\numberline {3.4.1}Posesivn\IeC {\'\i } kvantifik\'atory}{8}
+\contentsline {subsection}{\numberline {3.3.3}Hladov\'e vs. l\IeC {\'\i }n\'e kvantifik\'atory}{7}
+\contentsline {section}{\numberline {3.4}Optimalizace regul\'arn\IeC {\'\i }ch v\'yraz\r u}{7}
+\contentsline {subsection}{\numberline {3.4.1}Posesivn\IeC {\'\i } kvantifik\'atory}{7}
 \contentsline {subsection}{\numberline {3.4.2}Atomick\'e seskupov\'an\IeC {\'\i }}{8}
-\contentsline {section}{\numberline {3.5}UNICODE vlastnosti}{9}
+\contentsline {section}{\numberline {3.5}UNICODE vlastnosti}{8}
 \contentsline {section}{\numberline {3.6}Look Around}{10}
 \contentsline {section}{\numberline {3.7}Zachycov\'an\IeC {\'\i } (capture)}{10}
 \contentsline {chapter}{\numberline {4}Jazyky s vestav\v enou podporou regul\'arn\IeC {\'\i }ch v\'yraz\r u}{12}
