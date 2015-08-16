@@ -231,16 +231,18 @@ PCRE       & \verb|\m|                                                          
 
 Kulaté závorky () slouí pro zachycení èásti regulárního vırazu. Toto má celou øadu vyuití napøíklad za úèelem alternace, nahrazení, opakování apod. Podrobnìji se kulatımi závorkami budu vìnovat v kapitole Zachycení (capture).
 
-Metaznak \textbf{$\vert$} znaèí alternaci neboli logické \uv{nebo}. Pro pøíklad regulární vıraz \verb!(a|A)bc! uspìje na øetìzci \uv{abc} nebo na øetìzci \uv{Abc}. V pøípadì e bychom kulaté závorky vynechali, regulární vıraz \verb!a|Abc! uspìje buï na øetìzci \uv{a} nebo \uv{Abc}.
+Metaznak \textbf{$\vert$} znaèí alternaci neboli logické \uv{nebo}. Jako pøíklad uvedu regulární vıraz \verb!(abd|abc)(dh|d|de)! s øetìzcem \uv{abcde} nejprve porovná první èást tzn. \verb|abd|, zde najde shodu pouze pro \uv{ab},a proto udìlá backtracking a zkusí porovnat s \verb|abc|. Zde najde shodu a pokraèuje další èástí vırazu. Nejprve vyhledává \verb|dh|. Zde najde shodu pouze pro \uv{d}, provede tedy backtracking a pøejde k vyhledávání \uv{d}. Najde shodu a ukonèí se vyhledávání, protoe regulární vıraz ji neobsahuje ádnou další skupinu. Vısledek vyhledávání je zvıraznìn v øetìzci tuènì \uv{\textbf{abcd}e}.
 
 \subsection{Tøída znakù}
 Velmi uiteèná je také tøída znakù \verb|[]|. Tøída znakù slouí k rozpoznání libovolného znaku nebo nìkolika znakù uvnitø hranatıch závorek. Regulární vıraz \verb|[abc]| zachytí buï \uv{a} nebo \uv{b} nebo \uv{c}. Uvnitø tøídy znakù lze pouívat všechny metaznaky krom \verb|^\-| a \verb|]| bez zpìtného lomítka, jeliko uvnitø hranatıch závorek ztrácejí svojí speciální funkci. V jazycích Java a .NET mezi metaznaky v tøídì znakù patøí také \verb|[|.[s.31--32]{5}
 
 To proto, e tøída znakù v jazyce Java také umoòuje intersekce. Syntaxe intersekcí je následující: \verb|[tøída&&[intersekce]]|. Pomocí intersekce je moné napøíklad vynechat nìkteré znaky, které by jinak zahrnoval interval. Regulární vıraz \verb|[ac-fh-qs-y]| tak mùeme zapsat následovnì: \verb|[a-z&&[^bgrz]]|.\cite{9}
+
+
  
 NEMELO BY JIT [A-z]
 
-Znak \verb|^| uvnitø tøídy znakù znaèí negaci, èili regulární vıraz: \verb|a[^abc]c| uspìje na øetìzci \uv{\textbf{adc}}, ale sele na \uv{abc}. Je tøeba brát v potaz, e v regulárním vırazu \verb|[a^bc]|, kde není \verb|^| na prvním místì, se \verb|^| chová jako literál. Znak - je mimo hranaté závorky literál, ovšem uvnitø hranatıch závorek slouí k zapsání tøídy znakù jako interval. Regulární vıraz: \verb|[0-9A-z]*| uspìje na øetìzci \uv{\textbf{A9g}}, ale sele na \uv{è} jeliko implicitnì jsou rozeznány pouze znaky z ASCII tabulky.  Toto platí pouze v pøípadì, e se nenachází hned za uvozující závorkou tzn.\verb|[-a]| nebo hned pøed uzavírající závorkou tzn.\verb|[a-]|. V uvedenıch pøíkladech se pak - chová jako literál.\cite[s.31--32]{5} 
+Znak \verb|^| uvnitø tøídy znakù znaèí negaci, èili regulární vıraz: \verb|a[^abc]c| uspìje na øetìzci \uv{\textbf{adc}}, ale sele na \uv{abc}. Je tøeba brát v potaz, e v regulárním vırazu \verb|[a^bc]|, kde není \verb|^| na prvním místì, se \verb|^| chová jako literál. Znak - je mimo hranaté závorky literál, ovšem uvnitø hranatıch závorek slouí k zapsání tøídy znakù jako interval. Regulární vıraz: \verb|[0-9A-Za-z]*| uspìje na øetìzci \uv{\textbf{A9g}}, ale sele na \uv{è} jeliko implicitnì jsou rozeznány pouze znaky z ASCII tabulky.  Toto platí pouze v pøípadì, e se  - nenachází hned za uvozující závorkou tzn.\verb|[-a]| nebo hned pøed uzavírající závorkou tzn.\verb|[a-]|. V uvedenıch pøíkladech se pak - chová jako literál.\cite[s.31--32]{5} 
 
 Jako zjednodušení pro vıše popsanou tøídu znakù, existují zkratky tzv.\uv{tokeny}. Znak \verb|\w| je ekvivalentní s \verb|[A-Za-z0-9_]| a to v jazyce Java, Javascript a PCRE. Jazyky .NET a Perl umoòují \verb|\w| zachytit i znaky mimo ASCII tabulku (z èeskıch znakù napø. ı,á,í nebo é). 
 
@@ -302,12 +304,12 @@ Kvantifikátor toti pohltí všechny znaky v øetìzci a pøi porovnávání znaku \uv{a
 	\label{fig:obr4}
 \end{figure}
 
-\subsection{Atomické seskupování}
+\subsection{Atomické seskupení}
 Další moností, jak se pøedejít pøebyteènému backtrackingu, je pouití atomického seskupení \verb|(?> vıraz)|. Tato syntaxe umoòuje do závorek umístit jakoukoliv èást regulárního vırazu, v rámci kterého si nepøejeme provádìt backtracking (tzn. vıraz uvnitø závorek je \uv{nedìlitelnı}). Podobnì jako u posesivních kvantifikátorù se uvnitø kulatıch závorek nezapamatovávají pozice pro backtracking. 
 
 Vyuití bychom mohli najít napøíklad pøi alternaci. Regulární vıraz \verb|(?>bc|b)c| uspìje pouze na \uv{bcc}, nikoliv na \uv{bc}. \cite[s.72]{5}
 
-Atomické seskupování není podporováno v jazyce Javascript.
+Atomické seskupování není podporováno v jazyce Javascript a AWK.
 
 
 
@@ -337,39 +339,54 @@ Synataxe pro unicode písma \verb|\p{nazev_skriptu}| je podporována v Javì (od ve
 
 
 \section{Look Around}
-Look around rozpoznává pozici v textu. Existují ètyøi druhy look around.
+\uv{Look around} rozpoznává pozici v textu. Kontroluje pouze shodu bez toho, aby danı text pohltil. Bohuel nejsou podporovány jazykem AWK. Existují ètyøi druhy look around.
 
-\uv{Pozitivní lookahead} \verb|(?= ... )| uspìje, pouze pokud doprava od dané pozice se nachazí øetìzec vyhovující regulárnímu vırazu v kulatıch závorkách. Je podporován v jazycích Java, Javascript, Perl a PCRE. Napøíklad regulární vıraz \verb|aaa(?=bc)| uspìje na øetìzci \uv{\textbf{aaa}bc}(pozn. zachytí se pouze zvıraznìná èást).
+\uv{Pozitivní lookahead} \verb|(?= ... )| uspìje, pouze pokud doprava od dané pozice se nachazí øetìzec vyhovující regulárnímu vırazu v kulatıch závorkách. Je podporován v jazycích Java, Javascript, Perl a PCRE. Napøíklad regulární vıraz \verb|cat(?=dog)| uspìje na øetìzci \uv{\textbf{cat}dog}(pozn. zachytí se pouze zvıraznìná èást).
 
-\uv{Negativní lookahead} \verb|(?! ... )| neuspìje, pokud se doprava od dané pozice nachází øetìzec vyhovující regulárnímu vırazu v závorkách. Znamená to tedy, e regulární vıraz \verb|aaa(?!bc)| neuspìje na øetìzci \uv{aaabc}, ale upspìje na \uv{\textbf{aaa}gh}. Je podporován v jazyce Java, Javascript, Perl i PCRE. 
+\uv{Negativní lookahead} \verb|(?! ... )| neuspìje, pokud se doprava od dané pozice nachází øetìzec vyhovující regulárnímu vırazu v závorkách. Znamená to tedy, e regulární vıraz \verb|cat(?!dog)| neuspìje na øetìzci \uv{catdog}, ale upspìje na \uv{\textbf{cat}s}. Je podporován v jazyce Java, Javascript, Perl i PCRE. 
 
 \uv{Pozitivní lookbehind} \verb|(?<= ... )| uspìje, pouze pokud doleva od dané pozice se nachazí øetìzec vyhovující regulárnímu vırazu v kulatıch závorkách. Je podporován v jazycích Java, Perl a PCRE. Regulární vıraz \verb|(?<=bc)df| uspìje na \uv{bc\textbf{df}}.
 
 \uv{Negativní lookbehind} \verb|(?<! ... )| se chová podobnì jako negativní lookahead, s tím rozdílem, e kontroluje øetìzec doleva od dané pozice. Regulární vıraz \verb|(?<!bc)df| neuspìje na øetìzci \uv{bcdf}, ale na \uv{aa\textbf{df}} ano. Negativní lookbehind je podporován v jazycích Java, Perl a PCRE.
 
-Negativní a pozitivní lookbehind nepodporuje kvantifikátory, které umoòují nekoneèné opakování jako \verb|* + {1,}| uvnitø kulatıch závorek.\cite[s.75-77]{5}
+Negativní a pozitivní lookbehind nepodporuje kvantifikátory, které umoòují nekoneèné opakování jako \verb|* + {1,}|. To proto, e  \cite[s.75-77]{5}
 
 \section{Zachycování (capture)}
 Zachycování neboli anglicky \uv{capture} slouí k zachycení urèité èásti vırazu. K tomu slouí kulaté závorky () (viz. podkapitola Metaznaky). Zachycení pak má celou øadu vyuití jako napø. za úèelem nahrazení, zpìtné odkazy atd... Text je pak zachycen v oddìlenıch skupinách, které se èíslují od jedné do nekoneèna.
 
 V pøípadì, e nechceme, aby regulární vıraz zachytil nìkterou èást textu mùeme danou èást umístit do \verb|(?: ... )|. Tatot syntaxe se dá vyuít zejména pøi alternaci (viz. podkapitola Metaznaky). Regulární vıraz \verb|(jablka) (?:a|nebo) (hrušky)| na øetìzci \uv{jablka a hrušky} zachytí \uv{jablka} jako první skupinu a \uv{hrušky} jako druhou skupinu. Narozdíl od \verb|(jablka) (a|nebo) (hrušky)|, kde druhá skupina obsahuje \uv{a} a \uv{hrušky} jsou obsaeny a ve tøetí skupinì.
-Tato syntaxe je podporována v jazyce Java, Perl i Javascript.
+Tato syntaxe je podporována v jazyce Java, Perl i Javascript. Jazyk Perl navíc umoòuje nezachycení èásti v kulatıch závorkách pomocí vlajeèky \textit{n}.
 
-Dle oznaèení skupin je pak moné se na nì odkazovat. V jazycích Perl nebo Java je moné odkazovat na zachycenı text pomocí zpìtného lomítka a èísla dané skupiny (napø. \verb|\uv{\1}| odkazuje na první zachycenou skupinu ve vırazu tzn. \uv{jablka}). Regulární vıraz \verb!(jablka) (a|nebo) \1!, pak uspìje na øetìzci \uv{jablka a jablka}. Jazyk AWK text zachycenı v závorkách uloí do pole, tudí se zachycenım textem mùe dále pracovat jako s polokami v poli (viz. kapitola AWK).
+Dle oznaèení skupin je pak moné se na nì odkazovat. V jazycích Perl nebo Java je moné odkazovat na zachycenı text pomocí zpìtného lomítka a èísla dané skupiny (napø. \verb|\1| odkazuje na první zachycenou skupinu ve vırazu). Regulární vıraz \verb!<(b)>\w+<\/\1>!, pak uspìje na øetìzci \begin{verbatim} <b>regex</b> \end{verbatim}. Jazyk AWK ukládá text do pole, tudí se s ním mùe dále pracovat jako s polokami v poli (viz. kapitola AWK).
 
 Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazovat pomocí daného názvu, pomocí sytaxe \verb|(?P<nazev>...)(?P=nazev)| v jazyce Perl nebo \verb|(\k<nazev>...)\k<nazev)>|. Vıše uvedenı regulární vıraz dospìje ke stejnému vısledku i touto syntaxí : \verb|(?P<ovoce>jablka) a (?P=ovoce)| nebo \verb|(?<ovoce>jablka) a \k<ovoce>|. Pojmenovávání skupin není podporováno v jazyce Javascript a AWK.
 
 %jazyky s vestavenou podporou ---------------------
-\chapter{Jazyky s vestavìnou podporou regulárních vırazù}
+\chapter{Regulární vırazy v programovacích jazycích}
 \section{Perl}
-\section{AWK}
 \subsection{Obecné informace}
-AWK je jak poèítaèovım programem, tak i programovacím jazykem, kterı umoòuje danı program ovládat. Je zahrnut témìø ve všech UNIX systémech. Slouí zejména ke zpracování textovıch dat. K tomu hojnì vyuívá regulární vırazy.
+Jazyk Perl je skriptovací programovací jazyk vyvynut jako náhrada jazyku AWK. Nejnovìjší verzí je verze 5, ovšem v roce 2000 zapoèaly práce na Perl 6. Verze 6 se ale dodnes nedoèkala vydání. V této kapitole budu tedy popisovat monosti a vyuití regulárních vırazù v Perl 5.\cite{15}
+
+
+Veškerá syntaxe regulárních vırazù specifickıch pro Perl je popsána v knihovnì \uv{re}. Napøíklad Perl umoòuje rozšíøení tøídy znakù \verb|/(?[ ...])/|. Tato syntaxe podporuje jak intersekci \verb|&|, substrakci - èi logické nebo \verb{+}.
 
 \subsection{Syntaxe}
-Jazyk AWK se vyznaèuje hned nìkolika odlištnostmi od ostatních modifikací regulárních vırazù. Regulární vıraz se zapisuje mezi dvì lomítka \verb|(\ ... \)|. AWK umoòuje porovnávání øetìzcù pomocí operátorù \verb|~| a \verb|!~|. Syntaxe \verb|pozice ~ /regVyraz/| umoòuje vyhledat všechny vırazy, které odpovídají vzoru. \verb|pozice ~! /regVyraz/| umoòuje naopak najít všechny vırazy na dané pozici, které vzoru neodpovídají. \cite[s.45]{18}
+Regulární vıraz se podobnì jako v dalších jazycích zapisuje mezi dvì lomítka \verb|/.../|. Perl také umoòuje další zápisy \verb|m!...!| nebo \verb|m{...}|, které jsou s vıše uvedenım ekvivalentní.
 
-Další odlišností, která nebyla v pøechozím textu zmínìna, je pouívání odlišnı zktratek pro tøídu znakù. AWK umoòuje pouívat tøídu znakù definovanou POSIX standardem, pomocí \verb|[:nazevTridy:]|. Seznam níe uvádí pøehled názvù tøíd a jejich popis. \cite[s.51]{18}
+Pro práci s regulárními vırazy pouívá Perl operátory \verb|s///|,\verb|gr//| a \verb|split|.
+
+
+
+\cite{16}
+
+\section{AWK}
+\subsection{Obecné informace}
+AWK je jak poèítaèovım programem, tak i programovacím jazykem, kterı umoòuje danı program ovládat. Je zahrnut témìø ve všech UNIX systémech. Slouí zejména ke zpracování textovıch dat. K tomu hojnì vyuívá regulární vırazy. Pøíchu regulárních vırazù v jazyce AWK je dána POSIX standardem. Jazyk AWK byl vynalezen ji v roce 1977 a od té doby vzniklo nìkolik jeho rozšíøení. Jednou z verzí je nawk neboli \uv{nové awk} (anglicky new awk) nebo gawk nebo GNU awk, které pøináší øadu rozšíøení a to i z hlediska regulárních vırazù.
+
+\subsection{Syntaxe}
+Jazyk AWK se vyznaèuje hned nìkolika odlištnostmi od ostatních modifikací regulárních vırazù. Regulární vıraz se zapisuje mezi dvì lomítka \verb|(\ ... \)|. AWK umoòuje porovnávání øetìzcù pomocí operátorù \verb|~| a \verb|!~|. Syntaxe \verb|pozice ~ /regVyraz/| umoòuje vyhledat všechny vırazy, které odpovídají vzoru. \verb|pozice ~! /regVyraz/| umoòuje naopak najít všechny vırazy na dané pozici, které vzoru neodpovídají. \cite[s.45]{17}
+
+Další odlišností, která nebyla v pøechozím textu zmínìna, je pouívání odlišnıch zktratek pro tøídu znakù. AWK umoòuje pouívat tøídu znakù definovanou POSIX standardem, pomocí \verb|[:nazevTridy:]|. Seznam níe uvádí pøehled názvù tøíd a jejich popis. \cite[s.51]{18}
 \begin{itemize}
 \item \verb|[:alnum:]| veškeré alfanumerické znaky
 \item \verb|[:alpha:]| veškeré znaky písmen
@@ -387,12 +404,13 @@ Tøídu znakù je nutné zapisovat do dvojitıch hranatıch závorek napø. \verb|[[:alp
 
 AWK ète zadanı pøíkaz dvakrát. Poprvé pøeète zadanı program a podruhé vyhledá øetìzec vyhovující zadanému regulárnímu vırazu.\cite[s.53]{18}
 
-Jak ji bylo zmínìno vıše , AWK má implicitnì nastaven mód \uv{single line}. Pøi naèítání souboru rozdìluje vloenı text do záznamù oddìlené právì znakem nové øádky \uv{\n}. Pro zmìnu separátoru mùeme nastavit promìnnou RS na jakıkoli jinı znak.
+Jak ji bylo zmínìno vıše , AWK má implicitnì nastaven mód \uv{single line}. Pøi naèítání souboru rozdìluje vloenı text do záznamù oddìlené právì znakem nové øádky \uv{\n}. Pro zmìnu separátoru mùeme nastavit promìnnou \uz{RS} na jakıkoli jeden znak nebo prázdnı øetìzec.
 
-Záznamy jsou pak dále dìleny na pole, která jsou lépe programovì zpracovatelná (program si toti zapamatovává jejich pozice pomocí poètu záznamù, které ji byly pøeèteny). Separátor rozdìlující pole je buï literál nebo regulární vıraz. Separátor mùeme nastavit pomocí promìnné \uv{FS}. 
+Záznamy jsou pak dále dìleny na pole, která jsou lépe programovì zpracovatelná (program si toti zapamatovává jejich pozice pomocí poètu záznamù, které ji byly pøeèteny). Separátor rozdìlující pole je buï jakıkoli znak (vèetnì mezery) nebo regulární vıraz. Separátor mùeme nastavit pomocí promìnné \uv{FS}. 
 
 \begin{lstlisting}
-echo Jimmy Weasel, 100 Any Street#Jane Weasel, 99 Same Street | awk 'BEGIN{RS="#"; FS=","} /.+/ {print $1}
+echo Jimmy Weasel, 100 Any Street#Jane Weasel, 99 Same Street | 
+awk 'BEGIN{RS="#"; FS=","} /.+/ {print $1}'
 
 #vytiskne: 
 #Jimmy Weasel
@@ -400,24 +418,36 @@ echo Jimmy Weasel, 100 Any Street#Jane Weasel, 99 Same Street | awk 'BEGIN{RS="#
 
 \end{lstlisting}
 
-Pro nahrazování pouijeme metodu \textit{sub()}.
+Pro nahrazování pouijeme metodu \textit{sub()}, která má dva paramentry. Prvním parametrem je regulární vıraz a druhım øetìzec, kterı má nahradit vyhledanou èást.
 
 \begin{lstlisting}
 echo abcdefg| awk '{sub(/abc/,"cba");print}'
 # vytiskne "cbadefg" 
 \end{lstlisting}
 
+AWK umoòuje pøevést vloenı øetìzec do malıch èi velkıch písmen, a to pomocí metod \textit{tolower()} a \textit{toupper()}.
 
+\subsection{Rozšíøení gawk}
+Jak bylo ji zmínìno v úvodu této kapitoly, GNU awk neboli gawk umoòuje øadu rozšíøení oproti awk.
+
+Podporuje pouívání tzv. tokenù (viz. ...) a to: \verb|\s|, \verb|\w| a jejich negace a \verb|\B|. \verb|\b| v awk znaèí zpìtné lomítko, proto je zde token hranice slova znaèen jako \verb|\y|.
+Dále také umoòuje pouívání dalších: \verb|\<| zachycující práznı øetìzec na zaèátku slova a \verb|\>| zachycující prázdnı øetìzec na konci slova. 
+
+Oproti awk také umoòuje zapnout mód case-insensitive. Pomocí promìnné IGNORECASE, která je implicitnì nastavena na 0. Po zmìnì dané promìnné na 1 (tzn. IGNORECASE = 1), veškeré regulární vırazy a celı program budou mít zapnutı mód case-insensitive. 
+
+
+ 
 \section{Javascript}
 \subsection{Obecné informace}
 Javascript je objektovì orientovanı jazyk, pouívanı jako skriptovací jazyk pro webové stránky. Nicménì je spustitelnı i v nástroji node.js. Standardem pro Javascript je ECMAScript. Nejnovìjší verzí je ECMAScript 6 (neboli ECMA--262 6. edice) vydaná v roce 2015. Ovšem není podporován všemi internetovımi prohlíeèi ani nástrojem node.js, proto se v této kapitole budu dret syntaxe standardizovaném ECMAScript 5.1, která je plnì podporována.
 
 ECMAScript 6 pøináší vıznamné novinky z hlediska syntaxe\footnote{Více informací o zmìnách lze nalézt zde: http://es6-features.org/}. Z hlediska regulárních vırazù byly pøidány dvì vlajeèky a to: \verb|\u| pro unicodové vlastnosti a \verb|\y| tzn. \uv{sticky matcher}, kterı umoòuje procházet zadanı textovı øetìzec od pozice dané v promìnné \textit{RegExp.lastIndex}.
+
 \subsection{Syntaxe}
 
-Regulární vırazy v Javascriptu se zapisují mezi dvì lomítka \verb|/.../| a módy, které chceme pouít se zapisují a nakonec, za druhé lomítko napø. \verb|/.../gim|.\cite{16}
+Regulární vırazy v Javascriptu se zapisují mezi dvì lomítka \verb|/.../| a módy, které chceme pouít se zapisují a nakonec, za druhé lomítko napø. \verb|/.../gim|.\cite{18}
 
-Pro vytvoøení regulárního vırazu z textového øetìzce je zapotøebí vytvoøit objekt pomocí konstruktoru \textit{RegExp}. Tento konstruktor mùe mít buï jeden parametr, obsahující regulární vıraz bez lomítek, a nebo dva parametry, z nich první obsahuje regulární vıraz bez lomítek a druhı vlajeèku. Pøi vytváøení objektu regulárního vırazu mùe dojít k vıjimce \textit{SyntaxError}, která, jak u název napovídá, je vyvolána pøi zadání vırazu s nesprávnou syntaxí.\cite{16}
+Pokud chceme regulární vıraz pouít na více øetìzcù, lze objekt regulárního vırazu jednoduše vytvoøit pøiøazením promìnné. Objekt regulárního vırazu mùeme také vytvoøit z textového øetìzce pomocí konstruktoru \textit{RegExp}. Tento konstruktor mùe mít buï jeden parametr, obsahující regulární vıraz bez lomítek, a nebo dva parametry, z nich první obsahuje regulární vıraz bez lomítek a druhı vlajeèku. Pøi vytváøení objektu regulárního vırazu mùe dojít k vıjimce \textit{SyntaxError}, která, jak u název napovídá, je vyvolána pøi zadání vırazu s nesprávnou syntaxí.\cite{18}
 
 \begin{lstlisting}
 //Metoda zjištuje zda byla zadána i vlajeèka a poté vytvoøí regulární vıraz pomocí kontruktoru RegExp
@@ -444,7 +474,7 @@ Takto vytvoøenı RegExp objekt dìdí po svém pøedku metody:
 \begin{itemize}
 	\item \textit{RegExp.prototype.test()}, která otestuje, zda zadanı øetìzec odpovídá vzoru. Pøi nalezení shody vrací \textit{true}, v opaèném pøípadì \textit{false}.
 
-   \item \textit{RegExp.prototype.exec()}, která vrací nalezenou èást øetìzce odpovídající zadanému vzoru. A to v podobì pole. V pøípadì, e nenajde ádnou shodu, vrací \textit{null}. Stejného vısledku docílíme i metodou \textit{String.prototype.match()}. Ta navíc umoòuje vloit jako parametr jak objekt RexExp tak i regulární vıraz v typu string.\cite{16}
+   \item \textit{RegExp.prototype.exec()}, která vrací nalezenou èást øetìzce odpovídající zadanému vzoru. A to v podobì pole. V pøípadì, e nenajde ádnou shodu, vrací \textit{null}. Stejného vısledku docílíme i metodou \textit{String.prototype.match()}. Ta navíc umoòuje vloit jako parametr jak objekt RexExp tak i regulární vıraz v typu string.\cite{18}
 	
 \end{itemize}
 
@@ -470,7 +500,7 @@ Takto vytvoøenı RegExp objekt dìdí po svém pøedku metody:
 
 Napøíklad pøi zadání regulárního vırazu: \verb|[12][0-9]{3}| a øetìzce \uv{v roce 1990}, vıøe uvedená metoda vypíše do konzole: \verb|['1990',index: 7,input: 'v roce 1990']|. Na první pozici se nachází èást øetìzce odpovídající vzoru. Index znaèí pozici, na které se nachází \uv{1990}. Input pak ukazuje vloenı øetìzec.
 
-Pro nahrazení èásti øetìzce odpovídající danému vzoru, slouí metoda \textit{String.prototype.replace()}. Metoda vrací novı øetìzec tvoøenı pùvodním øetìzecem s nahrazenımi èástmi. Jako parametr mùe bıt pouit, jak regulární vıraz ve tvaru øetìzce (string), tak i jako objekt RegExp. Druhım parametrem je nahrazující øetìzec, kterı mùe bıt zadán jako string nebo jako metoda, která se zavolá pøi kadém pouití daného regulárního vırazu.. \cite{17}
+Pro nahrazení èásti øetìzce odpovídající danému vzoru, slouí metoda \textit{String.prototype.replace()}. Metoda vrací novı øetìzec tvoøenı pùvodním øetìzecem s nahrazenımi èástmi. Jako parametr mùe bıt pouit, jak regulární vıraz ve tvaru øetìzce (string), tak i jako objekt RegExp. Druhım parametrem je nahrazující øetìzec, kterı mùe bıt zadán jako string nebo jako metoda, která se zavolá pøi kadém pouití daného regulárního vırazu.. \cite{19}
 
 \begin{lstlisting}
 //metoda slouí k nahrazení èásti zadaného øetìzce (str), která odpovídá regulárnímu vırazu (reg)
@@ -489,11 +519,9 @@ function nahradit(reg,str,repl){
 };
 \end{lstlisting}
 
-Metoda \textit{replace()} neumoòuje vkládat vlajeèky jako parametr. Toto omezení lze obejít vyuitím RegExp objektu. Na zachycené èásti textu (viz. podkapitola Zachycení), se lze odkazovat pomocí \verb|$d|, kde d pøedstavuje èíslo dané skupiny.\cite{17} 
+Metoda \textit{replace()} neumoòuje vkládat vlajeèky jako parametr. Toto omezení lze obejít vyuitím RegExp objektu. Na zachycené èásti textu (viz. podkapitola Zachycení), se lze odkazovat pomocí \verb|$d|, kde d pøedstavuje èíslo dané skupiny.\cite{19} 
 
 
-%jazyky s knihovnami
-\chapter{Jazyky s knihovnami}
 \section{C\#}
 \section{Python}
 \section{Java} 
@@ -505,8 +533,8 @@ Vıznamnım odlišením od syntaxe regulárních vırazù v jinıch jazycích (vèetnì jazy
 \subsection{Pouívané tøídy a metody}
 Balíèek \textit{java.util.regex} obsahuje tøídy:
 \begin{itemize}
-	\item \textit{Pattern}, která provádí kontrolu syntaxe regulárního vırazu. Nemá veøejnı (public) kontruktor, k vytvoøení je proto tøeba \textit{public static Pattern compile(String regex)}. Pøi volání této metody je monı vznik vıjimky \textit{PatternSyntaxException}. Tato vıjimka se nemusí povinnì odchytávat. \cite{13}
-\item \textit{Matcher}, která zajišuje porovnávání zadaného vzoru a textového øetìzce. Podobnì jako tøída Pattern, nemá veøejnı kontruktor. K jejímu vytvoøení je tøeba volání metody na instanci tøídy Pattern \textit{public Matcher matcher(CharSequence input)}.\cite{15} Tato metoda mùe vyvolat vıjimku \textit{NullPointerException} v pøípadì, e její parametr bude \textit{null}.
+	\item \textit{Pattern}, která provádí kontrolu syntaxe regulárního vırazu. Nemá veøejnı (public) kontruktor, k vytvoøení instance je proto tøeba \textit{public static Pattern compile(String regex)}. Parametrem je regulární vıraz typu String. Pøi volání této metody je monı vznik vıjimky \textit{PatternSyntaxException}. Tato vıjimka se nemusí povinnì odchytávat, ale je to vhodné v pøípadì, e regulární vıraz zadává uivatel. \cite{13}
+\item \textit{Matcher}, která zajišuje porovnávání zadaného vzoru a textového øetìzce. Podobnì jako tøída Pattern, nemá veøejnı kontruktor. K jejímu vytvoøení je tøeba volání metody na instanci tøídy Pattern \textit{public Matcher matcher(CharSequence input)}.\cite{15} Tato metoda mùe vyvolat vıjimku \textit{NullPointerException} v pøípadì, e její parametr bude \textit{null}. Narozdíl od tøídy Pattern není vláknovì bezpeèná.
 \end{itemize}
 \begin{lstlisting}
 import java.util.regex.Matcher;
@@ -522,7 +550,7 @@ public class RegexLogika {
 
 Tøída Matcher pak má metody:
 \textit{public boolean matches()} umoòující porovnání øetìzce se zadanım vzorem.
-\textit{public boolean find()} hledající poèátek èásti zadaného øetìzce, kterı odpovídá vzoru. Vrací true, v pøípadì, e øetìzec obsahuje èást (tzv. \uv{substring}) odpovídající vzoru. Vyhledanı substring, pak lze získat pomocí metody \textit{public String group()}. \cite{15}
+\textit{public boolean find()} hledající poèátek èásti zadaného øetìzce, kterı odpovídá vzoru. Vrací true, v pøípadì, e øetìzec obsahuje èást (tzv. \uv{substring}) odpovídající vzoru. Vyhledanı substring, pak lze získat pomocí metody \textit{public String group()}. Metoda \textit{find()}, pøi prvním zavolání, prohledává zadanı øetìzec od zaèátku (tzn. od indexu 0). Nicménì pokud najde shodu a je zavolána podruhé, zaène vyhledávat od pozice za poslední nalezenou shodou. \cite{20}
 
 \begin{lstlisting}
    /**
@@ -532,7 +560,7 @@ Tøída Matcher pak má metody:
      * @return vyhledanı substring
      */
     public String vyhledat(String regex, String vstup) {
-        String vystup = "";
+          List<String> vystup = new ArrayList<>();
         //regularni vyraz zadany uzivatelem
         try {
             pattern = Pattern.compile(regex);
@@ -542,13 +570,21 @@ Tøída Matcher pak má metody:
         //vstup zadany uzivatelem
         try {
             m = pattern.matcher(vstup);
+				//zjištìní, zda øetìzec obsahuje nìjakou shodu
             if (m.find()) {
-               vystup = m.group();
+                vystup.add(m.group());
+				//hledání dalších shod øetìzce s regulárních vırazem        
+                while (m.find()) {
+                    vystup.add(m.group());
+                }
             } else {
-                vystup = "ÁDNÁ SHODA";
+                JOptionPane.showMessageDialog(null, "ádná shoda", "REGEX hlášení", JOptionPane.PLAIN_MESSAGE, null);
+
             }
+
         } catch (NullPointerException ex) {
-            vystup = "ÁDNÁ SHODA";
+            JOptionPane.showMessageDialog(null, "ádná shoda", "REGEX hlášení", JOptionPane.PLAIN_MESSAGE, null);
+
         }
         return vystup;
     }
@@ -564,11 +600,13 @@ Metodu \textit{group()} mùeme nahradit:
  vystup = vstup.substring(zacatek, konec);
 \end{lstlisting}
 
+Java neumoòuje automaticky vyhledávat všechny vıskyty shody s regulárním vırazem, pouze pouitím vlajeèky \uv{g} jako napøíklad Perl (viz. Perl). Lze vyhledat všechny vıskyty opakovanım voláním metody \textit{group()} a ukládáním vısledkù napøíklad do seznamu.
+
 Další metodou tøídy Matcher je \textit{public String replaceAll(String replacement)}, která zajistí nahrazení všech vıskytù nalezeného substringu v zadaném textu, textem èi odkazy udanımi v parametru metody.
 
 K nahrazení pouze prvního vıskytu daného substringu slouí metoda \textit{public String replaceFirst(String replacement)}. Obì metody vrací objekt typu String, kterı obsahuje vıslednı øetìzec po nahrazení.
 
-Parametr obou metod mùe obsahovat odkazy na zachycené skupiny (viz. kapitola Zachycení) za pomocí \verb|${nazevSkupiny}| nebo \verb|$d| (kde d znaèí èíslo skupiny). \cite{15}
+Parametr obou metod mùe obsahovat odkazy na zachycené skupiny (viz. kapitola Zachycení) za pomocí \verb|${nazevSkupiny}| nebo \verb|$d| (kde d znaèí èíslo skupiny). Jestlie nahrazovací text odkazuje na neexistující skupinu, vrátí se vıjimka IndexOutOfBoundsException. \cite{20}
 
 \begin{lstlisting}
 Pattern p = Pattern.compile("(\\w+)\\s(\\w+)");
@@ -576,6 +614,7 @@ Matcher m = p.matcher("John Smith");
 String vysledek = m.replaceAll("$2 $1");
 //promìnná vysledek je pak rovna "Smith John"
 \end{lstlisting}
+
 
 
 
@@ -608,16 +647,23 @@ String vysledek = m.replaceAll("$2 $1");
 
 \bibitem[14]{14} Supported Scripts. UNICODE, INC. \emph{The Unicode Standard} [online]. 2015-06-12 [cit. 2015-07-25]. Dostupné z: \verb|http://unicode.org/standard/supported.html|
 
-\bibitem[18]{18} ROBBINS, Arnold D. \textit{GAWK: Effective AWK Programming} [online]. Edition 4.1. USA: Free Software Foundation, 2015 [cit. 2015-07-28]. ISBN 1-882114-28-0. Dostupné z: \verb|http://www.gnu.org/software/gawk/manual/gawk.pdf|
+\bibitem[15]{15}Perl. \emph{Wikipedia: the free encyclopedia} [online]. San Francisco (CA): Wikimedia Foundation, 2015, 2015-06-03 [cit. 2015-08-15]. Dostupné z: \verb|https://cs.wikipedia.org/wiki/Perl|
+\verb|#Budouc.C3.AD_v.C3.BDvoj_.28Perl_6_a_VM_Parrot.29|
+
+\bibitem[16]{16}Perl regular expressions turtorial. KVALE, Mark. \textit{perldoc.perl.org: Perl Programming Documentation} [online]. 2000 [cit. 2015-08-15]. Dostupné z:\verb|http://perldoc.perl.org/perlretut.html|
 
 
-\bibitem[16]{16}Regular Expressions. MOZILLA. Mozilla Developer Network [online]. 2015-07-21 [cit. 2015-07-26]. Dostupné z: \verb|https://developer.mozilla.org/en-US/docs/Web/JavaScript/|
+\bibitem[17]{17} ROBBINS, Arnold D. \textit{GAWK: Effective AWK Programming} [online]. Edition 4.1. USA: Free Software Foundation, 2015 [cit. 2015-07-28]. ISBN 1-882114-28-0. Dostupné z: \verb|http://www.gnu.org/software/gawk/manual/gawk.pdf|
+
+
+\bibitem[18]{18}Regular Expressions. MOZILLA. Mozilla Developer Network [online]. 2015-07-21 [cit. 2015-07-26]. Dostupné z: \verb|https://developer.mozilla.org/en-US/docs/Web/JavaScript/|
 \verb|Guide/Regular_Expressions|
 
-\bibitem[17]{17}String.prototype.replace(). MOZILLA. Mozilla Developer Network [online]. 2015-07-13 [cit. 2015-07-27]. Dostupné z:\verb|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/|
+\bibitem[19]{19}String.prototype.replace(). MOZILLA. Mozilla Developer Network [online]. 2015-07-13 [cit. 2015-07-27]. Dostupné z:\verb|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/|
 \verb|Global_Objects/String/replace|
 
-\bibitem[15]{15} Class Matcher. ORACLE. \emph{Java™ Platform Standard Ed. 8 Documentation} [online]. 2015 [cit. 2015-07-25]. Dostupné z: \verb|https://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html|
+
+\bibitem[20]{20} Class Matcher. ORACLE. \emph{Java™ Platform Standard Ed. 8 Documentation} [online]. 2015 [cit. 2015-07-25]. Dostupné z: \verb|https://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html|
 
 
 \end{thebibliography}
