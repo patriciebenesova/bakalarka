@@ -154,7 +154,7 @@ Z desktopovıch aplikací bych uvedla napøíklad \uv{The Regex Couch}, kterı lze st
 \section{Literály a jejich øetìzení}
 Øetìzení umoòuje spojit jednotlivé znaky do skupin. Napøíklad regulárnímu vırazu: \texttt{abc} vyhoví jakıkoli øetìzec, kterı obsahuje danou skupinu na libovolném místì. Regulární vıraz tedy vyhoví napøíklad øetìzcùm:\uv{jkl\textbf{abc}jdabd}nebo \uv{\textbf{abc}ccccd}, ale nenajde shodu v øetìzci: \uv{ajbc}. 
 
-Jak toto vyhledávání funguje vystvìtlím na následujícím pøíkladu. Mìjme ji vıše uvedenı regulární vıraz \texttt{abc} a øetìzec:\uv{kaabc}. Pøi vyhledávání se zaèíná zleva a postuje se po jednotlivıch znacích. Nejprve se vezme znak \uv{k}, na kterém regulární vıraz sele, protoe první znak vırazu je \uv{a}. Proto øetìzec zkrátí o první znak a pokraèuje dalším znakem, co je znak \uv{a}. Zde regulární vıraz uspìje. Poté ovšem sele na tøetím znaku øetìzce \uv{a}, jeliko dalším znakem ve vırazu je znak \uv{b}. Provede se tedy tzv. \uv{backtrack}, co znamená, e regulární vıraz nepøejde na ètvrtı znak, ale zaène porovnávat regulární vıraz od zaèátku s tøetím znakem øetìzce \uv{a}. Zde najde shodu jeliko prvním znakem vırazu je \uv{a}. Poté pokraèuje v porovnávání ètvrtého znaku øetìzce \uv{b} se znakem \uv{b} regulárního vırazu, zde opìt najde shodu. Podobnì najde shodu i pøi znaku \uv{c}.\cite{6}
+Jak toto vyhledávání funguje vystvìtlím na následujícím pøíkladu. Mìjme ji vıše uvedenı regulární vıraz \texttt{abc} a øetìzec:\uv{kaabc}. Pøi vyhledávání se zaèíná zleva na pozici ještì pøed prvním znakem a postuje se po jednotlivıch znacích doprava. Nejprve se vezme znak \uv{k}, na kterém regulární vıraz sele, protoe první znak vırazu je \uv{a}. Proto se zaène vyhledávat od znova, tentokrát ale od pozice pøed druhım znakem a proces opakuje. Tento proces vracení se, se nazıvá \uv{backtracking}. Druhı znak øetìzce je \uv{a}. Zde regulární vıraz uspìje. Poté ovšem sele pøi porovnávání tøetího znaku øetìzce \uv{a} s literálem \uv{b}. Opìt provede backtracking a zaène se porovnávat od pozice tìsnì pøed tøetím znakem øetìzce. Zde najde shodu. Poté pokraèuje v porovnávání ètvrtého znaku øetìzce \uv{b} se znakem \uv{b} regulárního vırazu, zde opìt najde shodu. Podobnì najde shodu i pøi znaku \uv{c}.\cite{6}
 
 Názornì tento proces lze vidìt na obrázku 1.
 \begin{figure}[h!]
@@ -357,7 +357,7 @@ Zachycování neboli anglicky \uv{capture} slouí k zachycení urèité èásti vırazu.
 V pøípadì, e nechceme, aby regulární vıraz zachytil nìkterou èást textu mùeme danou èást umístit do \verb|(?: ... )|. Tatot syntaxe se dá vyuít zejména pøi alternaci (viz. podkapitola Metaznaky). Regulární vıraz \verb|(jablka) (?:a|nebo) (hrušky)| na øetìzci \uv{jablka a hrušky} zachytí \uv{jablka} jako první skupinu a \uv{hrušky} jako druhou skupinu. Narozdíl od \verb|(jablka) (a|nebo) (hrušky)|, kde druhá skupina obsahuje \uv{a} a \uv{hrušky} jsou obsaeny a ve tøetí skupinì.
 Tato syntaxe je podporována v jazyce Java, Perl i Javascript. Jazyk Perl navíc umoòuje nezachycení èásti v kulatıch závorkách pomocí vlajeèky \textit{n}.
 
-Dle oznaèení skupin je pak moné se na nì odkazovat. V jazycích Perl nebo Java je moné odkazovat na zachycenı text pomocí zpìtného lomítka a èísla dané skupiny (napø. \verb|\1| odkazuje na první zachycenou skupinu ve vırazu). Regulární vıraz \verb!<(b)>\w+<\/\1>!, pak uspìje na øetìzci \begin{verbatim} <b>regex</b> \end{verbatim}. Jazyk AWK ukládá text do pole, tudí se s ním mùe dále pracovat jako s polokami v poli (viz. kapitola AWK).
+Dle oznaèení skupin je pak moné se na nì odkazovat. V jazycích Perl nebo Java je moné odkazovat na zachycenı text pomocí zpìtného lomítka a èísla dané skupiny (napø. \verb|\1| odkazuje na první zachycenou skupinu ve vırazu). Regulární vıraz \verb!(\w)(\w)\2\1!, pak uspìje na øetìzci \uv{alla}. Jazyk Perl umoòuje dojít ke stejnému vısledku i pøi pouití jiné syntaxe \verb|(\w)(\w)\g2\g1|. Jazyk AWK ukládá text do pole, tudí se s ním mùe dále pracovat jako s polokami v poli (viz. kapitola AWK).
 
 Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazovat pomocí daného názvu, pomocí sytaxe \verb|(?P<nazev>...)(?P=nazev)| v jazyce Perl nebo \verb|(\k<nazev>...)\k<nazev)>|. Vıše uvedenı regulární vıraz dospìje ke stejnému vısledku i touto syntaxí : \verb|(?P<ovoce>jablka) a (?P=ovoce)| nebo \verb|(?<ovoce>jablka) a \k<ovoce>|. Pojmenovávání skupin není podporováno v jazyce Javascript a AWK.
 
@@ -365,19 +365,86 @@ Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazo
 \chapter{Regulární vırazy v programovacích jazycích}
 \section{Perl}
 \subsection{Obecné informace}
-Jazyk Perl je skriptovací programovací jazyk vyvynut jako náhrada jazyku AWK. Nejnovìjší verzí je verze 5, ovšem v roce 2000 zapoèaly práce na Perl 6. Verze 6 se ale dodnes nedoèkala vydání. V této kapitole budu tedy popisovat monosti a vyuití regulárních vırazù v Perl 5.\cite{15}
+Jazyk Perl je skriptovací programovací jazyk vyvynut jako náhrada jazyku AWK. Nejnovìjší verzí je verze 5, ovšem v roce 2000 zapoèaly práce na Perl 6. Verze 6 se ale dodnes nedoèkala vydání. V této kapitole budu tedy popisovat monosti a vyuití regulárních vırazù v Perl 5 verzi 22.0.\cite{15}
 
-
+\subsection{Rozšíøení podporováno v jazyce Perl}
 Veškerá syntaxe regulárních vırazù specifickıch pro Perl je popsána v knihovnì \uv{re}. Napøíklad Perl umoòuje rozšíøení tøídy znakù \verb|/(?[ ...])/|. Tato syntaxe podporuje jak intersekci \verb|&|, substrakci - èi logické nebo \verb{+}.
 
+Krom vıše uvedenıch modifikátorù Perl umoòuje také modifikátor \uv{a}, kterı zajišuje rozpoznávání pouze znakù z ASCII tabulky.
+
+Stejnì jaké AWK, také umoòuje pouívání POSIX syntaxy pro zkratky tøíd znakù (viz. AWK).\cite{16}
+
 \subsection{Syntaxe}
+
 Regulární vıraz se podobnì jako v dalších jazycích zapisuje mezi dvì lomítka \verb|/.../|. Perl také umoòuje další zápisy \verb|m!...!| nebo \verb|m{...}|, které jsou s vıše uvedenım ekvivalentní.
+Zapnutí rùznıch módù je pak umonìno zápisem daného modifikátoru za druhé lomítko napøíklad \verb|/.../s|.\cite{16}
 
-Pro práci s regulárními vırazy pouívá Perl operátory \verb|s///|,\verb|gr//| a \verb|split|.
+Pro práci s regulárními vırazy pouívá Perl operátory \verb|s///|,\verb|gr//| a \verb|split|.\cite{16}
+
+Porovnávání regulárního vırazu a textového øetìzce lze pak provádìt pomocí operátorù vracející booleanovské hodnoty (true a false):
+\begin{itemize}
+\item  \verb|=~|, kterı vrací \textit{true}  pokud vıraz uspìje, v opaèném pøípadì vrací \textit{false} 
+ \item \verb|!~|, kterı vrací \textit{true} v pøípadì, e vıraz neuspìje
+\end{itemize}
+
+\begin{lstlisting}
+"cats" =~ /cat/  #true
+"cats" !~ /cat/ #false
+\end{lstlisting}
+
+Perl si zapamatovává pozice shody i bez pouití kulatıch závorek a to poèáteèní pozici \verb|$-| a koneènou pozici \verb|$+|. Shodu pak mùeme jednoduše zobrazit pomocí metody \textit{substr()} se tøemi paramentry. Prvním parametrem je zadanı øetìzec, druhım poèáteèní index a tøetím délka. \cite{16}
+
+\begin{lstlisting}
+$x = "The cat caught the mouse";
+if($x=~/cat/){ 
+    	$found = substr($x,$-[0],$+[0]-$-[0]);
+      print "Nalezeno: $found na pozici od $-[0] do $+[0]";
+    }
+	# vytiskne: Nalezeno: cat na pozici od 4 do 7
+\end{lstlisting}
+
+Nalezenou shodu lze také získat pomocí promìnnıch \verb|$&| nebo \verb|${^MATCH}|.\cite{16}
+
+V pøípadì, e chceme nalézt veškeré shody vzoru se zadanım textem, mùeme všechny vısledky uloit do pole. V pøípadì pouití kulatıch závorek zachycuje se shoda s regulárním vırazem v závorce do samostatné poloky pole.\cite{16}
+
+\begin{lstlisting}
+@matches = ($x=~/\b\w{3}\b/g); 
+# matches[0] = 'The'
+# matches[1] ='cat'
+# matches[2] ='the'
+\end{lstlisting}
+
+Ji vıše zmínìnı operátor split se syntaxí: \verb|split /vzor/,"retezec"| umoòuje øetìzec rozdìlit dle zadaného vzoru. Vısledkem je pak opìt pole. \cite{16}
+
+\begin{lstlisting}
+$y = "+420895895895 +421965896854 +420598632412";
+ @pole = split /\+\d{3}/,$y;
+# pole[0] = '895895895 '
+# pole[1] = '965896854 '
+# pole[2] = '598632412 '
+\end{lstlisting} 
+
+Dalším opeátorem je operátor \uv{vyhledání a nahrazení} \verb|s///|, jeho pouití je dáno syntaxí je \verb|s/regulární vıraz/nahrazení/modifikátory|. 
+\begin{lstlisting}
+$g = "Bylo nás 5";
+$g =~ s/5/pìt/;
+#$g = Bylo nás pìt
+\end{lstlisting}
+Pøi nahrazování vırazu na více místech v øetìzci, je tøeba pouít vlajeèku \verb|g|.\cite{16}
+
+Vıše uvedenım pouitím se nahradí stávající øetìzec. Tomu se lze vyhnout pomocí modifikátoru \verb|r|. Bez jejího pouití se do pomocné promìnné uloí pouze èíslo substituce.\cite{16}
+\begin{lstlisting}
+$g = "Bylo nás 5";
+$d = $g =~ s/5/pìt/r;
+
+#$g = "Bylo nás 5"
+#$d = "Bylo nás pìt"
+\end{lstlisting}
+Vlajeèka umoòuje také øetìzení substitucí, kde se provádí nahrazení v ji jednou (nebo vícekrát) zmìnìném øetìzci.\cite{16}
+
+Pouitím vıše uvedené syntaxe se regulární vıraz pøi pouítí v kódu na více místech bude pokadé znovu pøekládat. Øešením je operátor \verb|gr//|. \cite{16}
 
 
-
-\cite{16}
 
 \section{AWK}
 \subsection{Obecné informace}
@@ -441,11 +508,11 @@ Oproti awk také umoòuje zapnout mód case-insensitive. Pomocí promìnné IGNORECAS
 \subsection{Obecné informace}
 Javascript je objektovì orientovanı jazyk, pouívanı jako skriptovací jazyk pro webové stránky. Nicménì je spustitelnı i v nástroji node.js. Standardem pro Javascript je ECMAScript. Nejnovìjší verzí je ECMAScript 6 (neboli ECMA--262 6. edice) vydaná v roce 2015. Ovšem není podporován všemi internetovımi prohlíeèi ani nástrojem node.js, proto se v této kapitole budu dret syntaxe standardizovaném ECMAScript 5.1, která je plnì podporována.
 
-ECMAScript 6 pøináší vıznamné novinky z hlediska syntaxe\footnote{Více informací o zmìnách lze nalézt zde: http://es6-features.org/}. Z hlediska regulárních vırazù byly pøidány dvì vlajeèky a to: \verb|\u| pro unicodové vlastnosti a \verb|\y| tzn. \uv{sticky matcher}, kterı umoòuje procházet zadanı textovı øetìzec od pozice dané v promìnné \textit{RegExp.lastIndex}.
+ECMAScript 6 pøináší vıznamné novinky z hlediska syntaxe\footnote{Více informací o zmìnách lze nalézt zde: http://es6-features.org/}. Z hlediska regulárních vırazù byly pøidány dva modifikátory a to: \verb|\u| pro unicodové vlastnosti a \verb|\y| tzn. \uv{sticky matcher}, kterı umoòuje procházet zadanı textovı øetìzec od pozice dané v promìnné \textit{RegExp.lastIndex}.
 
 \subsection{Syntaxe}
 
-Regulární vırazy v Javascriptu se zapisují mezi dvì lomítka \verb|/.../| a módy, které chceme pouít se zapisují a nakonec, za druhé lomítko napø. \verb|/.../gim|.\cite{18}
+Regulární vırazy v Javascriptu se zapisují mezi dvì lomítka \verb|/.../| a mofigikátory, které chceme pouít se zapisují a nakonec, za druhé lomítko napø. \verb|/.../gim|.\cite{18}
 
 Pokud chceme regulární vıraz pouít na více øetìzcù, lze objekt regulárního vırazu jednoduše vytvoøit pøiøazením promìnné. Objekt regulárního vırazu mùeme také vytvoøit z textového øetìzce pomocí konstruktoru \textit{RegExp}. Tento konstruktor mùe mít buï jeden parametr, obsahující regulární vıraz bez lomítek, a nebo dva parametry, z nich první obsahuje regulární vıraz bez lomítek a druhı vlajeèku. Pøi vytváøení objektu regulárního vırazu mùe dojít k vıjimce \textit{SyntaxError}, která, jak u název napovídá, je vyvolána pøi zadání vırazu s nesprávnou syntaxí.\cite{18}
 
@@ -600,7 +667,7 @@ Metodu \textit{group()} mùeme nahradit:
  vystup = vstup.substring(zacatek, konec);
 \end{lstlisting}
 
-Java neumoòuje automaticky vyhledávat všechny vıskyty shody s regulárním vırazem, pouze pouitím vlajeèky \uv{g} jako napøíklad Perl (viz. Perl). Lze vyhledat všechny vıskyty opakovanım voláním metody \textit{group()} a ukládáním vısledkù napøíklad do seznamu.
+Java neumoòuje automaticky vyhledávat všechny vıskyty shody s regulárním vırazem, pouze pouitím modifikátoru \uv{g} jako napøíklad Perl (viz. Perl). Lze vyhledat všechny vıskyty opakovanım voláním metody \textit{group()} a ukládáním vısledkù napøíklad do seznamu.
 
 Další metodou tøídy Matcher je \textit{public String replaceAll(String replacement)}, která zajistí nahrazení všech vıskytù nalezeného substringu v zadaném textu, textem èi odkazy udanımi v parametru metody.
 

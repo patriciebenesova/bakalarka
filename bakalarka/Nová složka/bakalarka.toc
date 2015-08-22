@@ -22,16 +22,17 @@
 \contentsline {chapter}{\numberline {4}Regul\'arn\IeC {\'\i } v\'yrazy v programovac\IeC {\'\i }ch jazyc\IeC {\'\i }ch}{12}
 \contentsline {section}{\numberline {4.1}Perl}{12}
 \contentsline {subsection}{\numberline {4.1.1}Obecn\'e informace}{12}
-\contentsline {subsection}{\numberline {4.1.2}Syntaxe}{12}
-\contentsline {section}{\numberline {4.2}AWK}{12}
-\contentsline {subsection}{\numberline {4.2.1}Obecn\'e informace}{12}
-\contentsline {subsection}{\numberline {4.2.2}Syntaxe}{12}
-\contentsline {subsection}{\numberline {4.2.3}Roz\v s\IeC {\'\i }\v ren\IeC {\'\i } gawk}{14}
-\contentsline {section}{\numberline {4.3}Javascript}{14}
-\contentsline {subsection}{\numberline {4.3.1}Obecn\'e informace}{14}
-\contentsline {subsection}{\numberline {4.3.2}Syntaxe}{14}
-\contentsline {section}{\numberline {4.4}C\#}{16}
-\contentsline {section}{\numberline {4.5}Python}{16}
-\contentsline {section}{\numberline {4.6}Java}{16}
-\contentsline {subsection}{\numberline {4.6.1}Obecn\'e informace}{16}
-\contentsline {subsection}{\numberline {4.6.2}Pou\v z\IeC {\'\i }van\'e t\v r\IeC {\'\i }dy a metody}{16}
+\contentsline {subsection}{\numberline {4.1.2}Roz\v s\IeC {\'\i }\v ren\IeC {\'\i } podporov\'ano v jazyce Perl}{12}
+\contentsline {subsection}{\numberline {4.1.3}Syntaxe}{12}
+\contentsline {section}{\numberline {4.2}AWK}{14}
+\contentsline {subsection}{\numberline {4.2.1}Obecn\'e informace}{14}
+\contentsline {subsection}{\numberline {4.2.2}Syntaxe}{14}
+\contentsline {subsection}{\numberline {4.2.3}Roz\v s\IeC {\'\i }\v ren\IeC {\'\i } gawk}{15}
+\contentsline {section}{\numberline {4.3}Javascript}{15}
+\contentsline {subsection}{\numberline {4.3.1}Obecn\'e informace}{15}
+\contentsline {subsection}{\numberline {4.3.2}Syntaxe}{16}
+\contentsline {section}{\numberline {4.4}C\#}{17}
+\contentsline {section}{\numberline {4.5}Python}{17}
+\contentsline {section}{\numberline {4.6}Java}{17}
+\contentsline {subsection}{\numberline {4.6.1}Obecn\'e informace}{17}
+\contentsline {subsection}{\numberline {4.6.2}Pou\v z\IeC {\'\i }van\'e t\v r\IeC {\'\i }dy a metody}{18}
