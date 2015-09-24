@@ -14,7 +14,9 @@ $g = "Bylo nás 5";
 $d = $g =~ s/5/pět/r;
 print  $d;
    
-
+$f = "tangerine";
+@a = ($f =~ /(tang|tangerine|tan)/);
+print for @a;
 
 
 

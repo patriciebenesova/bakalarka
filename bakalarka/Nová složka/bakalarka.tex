@@ -134,7 +134,7 @@ Thomson také implementoval Kleeneho notaci do textového editoru QED. Tuto funkci
 
 Komplikovanìjší regulární vırazy se v 80. letech minulého století zaèaly objevovat v jazyce Perl. Vycházely pøitom z regex knihovny napsané kanadskım programátorem Henry Spencerem. Zaèaly se zde objevovat i regulární vırazy, na které nebylo moné pouít koneènı deterministickı automat, u kterého mùeme v kadém jeho stavu jasnì urèit, co automat udìlá. Byly ale moné rozpoznat nedeterministickımi koneènımi automaty (NFA), u kterıch pøevauje jistá míra nejednoznaènosti. Spencer pozdìji regulární vırazy implementoval i do skriptovacího jazyka Tcl, známé pod názvem Advance Regular Expressions (ARE).
 
-V roce 1992 byly regulární vırazy v pùvodní podobì standardizovány v POSIX.2 standardu. Nicménì poèítaèovı programátor Philip Hazel v roce 1997 vyvynul PCRE (Perl Compatible Regular Expressions), jeho syntaxe je více flexibilní ne v POSIXu. Je vyuíván napøíklad v jazyce PHP nebo Apache HTTP Server.\cite{3}I kdy úplnı název PCRE zní \uv{Perl Compatible Regular Expressions}, PCRE a Perl mají své odlišnosti\cite{4}, které v této práci nebudou podrobnìjí popsány. 
+V roce 1992 byly regulární vırazy v pùvodní podobì standardizovány v POSIX.2 standardu. Nicménì poèítaèovı programátor Philip Hazel v roce 1997 vyvynul PCRE (Perl Compatible Regular Expressions), jeho syntaxe je více flexibilní ne v POSIXu. Je vyuíván napøíklad v jazyce PHP nebo Apache HTTP Server.\cite{3}I kdy úplnı název PCRE zní \uv{Perl Compatible Regular Expressions}, PCRE a Perl mají své odlišnosti\cite{4}, které v této práci budou podrobnìji popsány. 
 
 Dnes jsou regulární vırazy podporovány v mnoha jazycích a programech jako napøíklad Java, Python, JavaScript atd.
 \newpage
@@ -180,7 +180,7 @@ Java       & \begin{tabular}[c]{@{}l@{}}Pattern.CASE\_INSENSITIVE\\ nebo (?i)\en
 Perl       & \verb|/i |                                                                               \\ \hline
 AWK        & \begin{tabular}[c]{@{}l@{}}IGNORECASE = 0\\ (zajistí zapnutí módu globálnì v gawk)\end{tabular} \\ \hline
 Javascript & \verb|/i |                                                                                \\ \hline
-PCRE       & \verb|/i |      \\ \hline                                                                                  
+PCRE       & \verb|(?i) |      \\ \hline                                                                                  
 \end{tabular}
 \end{table}
 
@@ -204,7 +204,7 @@ Java       & Pattern.DOTALL                                                     
 Perl       & \verb|/s |                                                               \\ \hline
 AWK        & \begin{tabular}[c]{@{}l@{}}ji implicitnì\\ nastaveno\end{tabular} \\ \hline
 Javascript & nepodporuje                                                        \\ \hline
-PCRE       & \verb|/s |                                                                 \\ \hline
+PCRE       & \verb|(?s) |                                                                 \\ \hline
 \end{tabular}
 \end{table} 
 
@@ -218,12 +218,12 @@ Dùleité pøi pouívání tzv. kotev v regulárních vırazech je, e nezachycují zaèá
 \label{tab: tab3}
 \begin{tabular}{|l|l|}
 \hline
-\multicolumn{2}{|l|}{Dot all}                                                          \\ \hline
+\multicolumn{2}{|l|}{Multiline}                                                          \\ \hline
 Java       & Pattern.MULTILINE                                                         \\ \hline
 Perl       & \verb|/m|                                                                       \\ \hline
 AWK        & \begin{tabular}[c]{@{}l@{}}dá se nastavit pomocí \\  FS="\verb|\n|" \end{tabular} \\ \hline
 Javascript & \verb|/m|                                                                        \\ \hline
-PCRE       & \verb|/m|                                                                        \\ \hline
+PCRE       & \verb|(?m)|                                                                        \\ \hline
 \end{tabular}
 \end{table}
 
@@ -359,10 +359,10 @@ Tato syntaxe je podporována v jazyce Java, Perl i Javascript. Jazyk Perl navíc u
 
 Dle oznaèení skupin je pak moné se na nì odkazovat. V jazycích Perl, Javascript nebo Java je moné odkazovat na zachycenı text pomocí zpìtného lomítka a èísla dané skupiny (napø. \verb|\1| odkazuje na první zachycenou skupinu ve vırazu). Regulární vıraz \verb!(\w)(\w)\2\1!, pak uspìje na øetìzci \uv{alla}. Jazyk Perl umoòuje dojít ke stejnému vısledku i pøi pouití jiné syntaxe \verb|(\w)(\w)\g2\g1|. Jazyk AWK ukládá text do pole, tudí se s ním mùe dále pracovat jako s polokami v poli (viz. kapitola AWK).
 
-Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazovat pomocí daného názvu, pomocí sytaxe \verb|(?P<nazev>...)(?P=nazev)| v jazyce Perl nebo \verb|(\k<nazev>...)\k<nazev)>|. Vıše uvedenı regulární vıraz dospìje ke stejnému vısledku i touto syntaxí : \verb|(?P<ovoce>jablka) a (?P=ovoce)| nebo \verb|(?<ovoce>jablka) a \k<ovoce>|. Pojmenovávání skupin není podporováno v jazyce Javascript a AWK.
+Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazovat pomocí daného názvu, pomocí sytaxe \verb|(?P<nazev>...)(?P=nazev)| v PCRE2 i jazyce Perl nebo \verb|(\k<nazev>...)\k<nazev)>|. Vıše uvedenı regulární vıraz dospìje ke stejnému vısledku i touto syntaxí : \verb|(?P<ovoce>jablka) a (?P=ovoce)| nebo \verb|(?<ovoce>jablka) a \k<ovoce>|. Pojmenovávání skupin není podporováno v jazyce Javascript a AWK.
 
-%jazyky s vestavenou podporou ---------------------
-\chapter{Regulární vırazy v programovacích jazycích}
+
+\chapter{Pouití v programovacích jazycích}
 \section{Perl}
 \subsection{Obecné informace}
 Jazyk Perl je skriptovací programovací jazyk vyvynut jako náhrada jazyku AWK. Nejnovìjší verzí je verze 5, ovšem v roce 2000 zapoèaly práce na Perl 6. Verze 6 se ale dodnes nedoèkala vydání. V této kapitole budu tedy popisovat monosti a vyuití regulárních vırazù v Perl 5 verzi 22.0.\cite{15}
@@ -701,7 +701,7 @@ Další metodou tøídy Matcher je \textit{public String replaceAll(String replaceme
 
 K nahrazení pouze prvního vıskytu daného substringu slouí metoda \textit{public String replaceFirst(String replacement)}. Obì metody vrací objekt typu String, kterı obsahuje vıslednı øetìzec po nahrazení.
 
-Parametr obou metod mùe obsahovat odkazy na zachycené skupiny (viz. kapitola Zachycení) za pomocí \verb|${nazevSkupiny}| nebo \verb|$d| (kde d znaèí èíslo skupiny). Jestlie nahrazovací text odkazuje na neexistující skupinu, vrátí se vıjimka IndexOutOfBoundsException. \cite{22}
+Parametr obou metod mùe obsahovat odkazy na zachycené skupiny (viz. kapitola Zachycení) za pomocí \verb|${nazevSkupiny}| nebo \verb|$d| (kde d znaèí èíslo skupiny). Jestlie nahrazovací text odkazuje na neexistující skupinu, vrátí se vıjimka \\IndexOutOfBoundsException. \cite{22}
 
 \begin{lstlisting}
 Pattern p = Pattern.compile("(\\w+)\\s(\\w+)");
@@ -711,9 +711,80 @@ String vysledek = m.replaceAll("$2 $1");
 \end{lstlisting}
 
 
-\section{PCRE}
+\section{PCRE - Perl Compatible Regular Expressions}
+\subsection{Obecnı popis}
+Jak ji bylo øeèeno vıše (viz. kapitola Historie), PCRE knihovny regulárních vırazù jsou zavedeny v jazyce PHP nebo pouívané u Apache HTTP Serveru. Kromì open--sourcovıch projektù je PCRE vyuíváno napøíklad i v Apple Safari.\cite{23}
 
+V roce 2015 byla vydána nová verze PCRE knihovny tzv. PCRE2. Tato verze je oznaèována jako 10.20. \cite{23} V této podkapitole budu tedy pracovat s touto verzí.
 
+PCRE2 je stejnì jako jeho pøechùdce napsána v jazyce C a to ve tøech verzích 8-bitové, 16-bitové nebo 32-bitové. Ve všech verzích mohou bıt textové øetìzce typu string interpretovány i pomocí Unicode kódování. 
+
+PCRE2 podporuje regulární vırazy stejné jako Perl 5, ovšem s nìkolika rozdíly. Nicménì se snaí,aby jeho syntaxe nebyl v rozporu s Perl syntaxí.
+
+\subsection{Pouití}
+Pro otestování pøekladu regulárních vırazù existuje program \textit{pcre2test}. Pøi spouštìní programu z pøíkazové øádky je moné zadat nastavení, dále cestu k souboru, ze kterého má èíst, a cestu k souboru, do kterého má zapsat vısledek.  Nastavení, která je moné zadat jsou:
+\begin{itemize}
+	\item -8 pro pouití 8-bit verze
+	\item -16 pro pouití 16-bitové verze
+	\item -32 pro pouití 32-bitové verze
+\end{itemize}
+Pro vıše uvedené je dùleité mít danou verzi nainstalovanou. To lze zjistit pomocí nastavení -C, které vypíše veškeré informace o programu.\cite{24}
+
+Pokud nejsou zadány ádné soubory je moné ppracovat s programem pøes pøíkazovou øádku.To vyaduje zadání parametru \verb|re>| a \verb|data>|. Parametr \verb|re>| znaèí vzor ve podobì regulárního vırazu a za parametr \verb|data>| se dosadí textovı øetìzec, se kterım se má vzor porovnávat. Pro porovnávání je spuštìna funkce \verb|pcre2_match()|, která, kdy uspìje, vrátí seznam zachycenıch èástí vstupního textu. Seznam je èíslovanı od 0, kde je vypsáná celá èást textu odpovídajícím vzoru. V níe uvedeném pøíkladì je nelezenou èástí \uv{lampi}. Další polokou s èíslem 1 je pak zachycená èást v kulatıch závorkách, tedy \uv{lamp} v níe uvedeném pøíkladì. Pokud není shoda nalezena vrátí funkce \uv{No match} (èesky \uv{ádná shoda}). \cite{24}
+
+\begin{verbatim}
+C:\>pcre2test
+PCRE2 version 10.20 2015-06-30
+	re> /(lamp|lampion|la).?/
+	data> lampion
+	0: lampi
+	1: lamp
+	data> gg
+	No match
+\end{verbatim}
+ 
+Pomocí tohoto algoritmu postupuje i Perl 5. Pøi alternaci postupuje zleva a kdy najde první shodu, porovnávání se ukonèí. PCRE2 ovšem umoòuje vyuití i deterministického koneèného automatu. K tomu slouí funkce \verb|pcre2_dfa_match()|. K jejímu volání je tøeba za vstupní text napsat \uv{\textbackslash=dfa}. Poté se vypíší všechny nálezy v alternaci, bez ohledu na to v jakém poøadí jsou v alternaci zapsány(viz. pøíklad níe). \cite{24}
+
+\begin{verbatim}
+C:\>pcre2test
+PCRE2 version 10.20 2015-06-30
+	re> /(lamp|lampion|la)/
+	data> lampion\=dfa
+	0: lampion
+	1: lamp
+	2: la
+\end{verbatim}
+
+\subsection{Syntaxe}
+Jak ji bylo zmínìno v úvodu této kapitoly, PCRE2 nabízí v regulárních vırazech funkce odlišné od syntaxe v Perlu. 
+
+Umoòuje napøíklad nastavení (*UCP), které zpùsobuje, e\verb|\w| a \verb|\d| rozeznají i znaky s kódováním Unicode. Pouití je moné vidìt na následujícím pøíkladu.
+
+\begin{verbatim}
+C:\>pcre2test
+PCRE2 version 10.20 2015-06-30
+	re> /(*UCP)\w{2,}/
+	data> Øecko
+	0: \xfcecko
+	
+\end{verbatim}
+
+Stejnì jako u ostatních modifikací regulárních vırazù je i v PCRE2 tøeba metaznaky tzv. \uv{escapovat}. Ovšem PCRE2 umoòuje také zrušení vıznamu metaznakù pomocí \verb|\Q ... \E|.
+
+\begin{verbatim}
+C:\>pcre2test
+PCRE2 version 10.20 2015-06-30
+	re> /\Qabc?$d\E/
+	data> abc?$d
+	0: abc?$d
+	re> /abc\?\$d/
+	data> abc?$d
+	0: abc?$d
+\end{verbatim}
+
+Jak je vidìt na pøíkladu vıše, je tak moné \uv{vypnout} funkci u více metaznakù najednou bez nutnosti zápisu zpìtného lomítka pøed kadı zvláš.
+
+Vıznamné rozdíly mezi Perl a PCRE2 syntaxí lze najít v rekursivním vyhledávání. http://www.pcre.org/current/doc/html/pcre2pattern.html#SEC23
 
 \begin{thebibliography}{99}
 
@@ -765,6 +836,10 @@ String vysledek = m.replaceAll("$2 $1");
 
 
 \bibitem[22]{22} Class Matcher. ORACLE. \emph{Java™ Platform Standard Ed. 8 Documentation} [online]. 2015 [cit. 2015-07-25]. Dostupné z: \verb|https://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html|
+
+\bibitem[23]{23} HAZEL, Philip. \emph{PCRE - Perl Compatible Regular Expressions} [online]. [cit. 2015-09-21]. Dostupné z: \verb|http://www.pcre.org/|
+
+\bibitem[24]{24} HAZEL, Philip. Pcre2test specification. \emph{PCRE - Perl Compatible Regular Expressions} [online]. 2015-05-20 [cit. 2015-09-22]. Dostupné z: \verb|http://www.pcre.org/current/doc/html/pcre2test.html|
 
 
 \end{thebibliography}

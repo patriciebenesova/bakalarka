@@ -19,7 +19,7 @@
 \contentsline {section}{\numberline {3.5}UNICODE vlastnosti}{8}
 \contentsline {section}{\numberline {3.6}Look Around}{10}
 \contentsline {section}{\numberline {3.7}Zachycov\'an\IeC {\'\i } (capture)}{10}
-\contentsline {chapter}{\numberline {4}Regul\'arn\IeC {\'\i } v\'yrazy v programovac\IeC {\'\i }ch jazyc\IeC {\'\i }ch}{12}
+\contentsline {chapter}{\numberline {4}Pou\v zit\IeC {\'\i } v programovac\IeC {\'\i }ch jazyc\IeC {\'\i }ch}{12}
 \contentsline {section}{\numberline {4.1}Perl}{12}
 \contentsline {subsection}{\numberline {4.1.1}Obecn\'e informace}{12}
 \contentsline {subsection}{\numberline {4.1.2}Roz\v s\IeC {\'\i }\v ren\IeC {\'\i } podporov\'ano v jazyce Perl}{12}
@@ -36,4 +36,7 @@
 \contentsline {section}{\numberline {4.6}Java}{18}
 \contentsline {subsection}{\numberline {4.6.1}Obecn\'e informace}{18}
 \contentsline {subsection}{\numberline {4.6.2}Pou\v z\IeC {\'\i }van\'e t\v r\IeC {\'\i }dy a metody}{19}
-\contentsline {section}{\numberline {4.7}PCRE}{21}
+\contentsline {section}{\numberline {4.7}PCRE - Perl Compatible Regular Expressions}{21}
+\contentsline {subsection}{\numberline {4.7.1}Obecn\'y popis}{21}
+\contentsline {subsection}{\numberline {4.7.2}Pou\v zit\IeC {\'\i }}{21}
+\contentsline {subsection}{\numberline {4.7.3}Syntaxe}{22}
