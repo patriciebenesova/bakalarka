@@ -112,8 +112,15 @@ Obsahuje zamìøení a hlavní cíl práce, zpùsob dosaení cíle, pøínos práce (vlastn
 \thispagestyle{empty}
 
 %obsah------------------------------------------------------------------------
-\tableofcontents
-\thispagestyle{empty}
+
+
+\pagestyle{empty}
+{
+  \renewcommand{\thispagestyle}[1]{}
+  \tableofcontents
+}
+\clearpage
+\pagestyle{plain}
 
 %text----------------------------------------------------------------------------
 \chapter{Úvod}
@@ -234,7 +241,7 @@ Kulaté závorky () slouí pro zachycení èásti regulárního vırazu. Toto má celou ø
 Metaznak \textbf{$\vert$} znaèí alternaci neboli logické \uv{nebo}. Jako pøíklad uvedu regulární vıraz \verb!(abd|abc)(dh|d|de)! s øetìzcem \uv{abcde} nejprve porovná první èást tzn. \verb|abd|, zde najde shodu pouze pro \uv{ab},a proto udìlá backtracking a zkusí porovnat s \verb|abc|. Zde najde shodu a pokraèuje další èástí vırazu. Nejprve vyhledává \verb|dh|. Zde najde shodu pouze pro \uv{d}, provede tedy backtracking a pøejde k vyhledávání \uv{d}. Najde shodu a ukonèí se vyhledávání, protoe regulární vıraz ji neobsahuje ádnou další skupinu. Vısledek vyhledávání je zvıraznìn v øetìzci tuènì \uv{\textbf{abcd}e}.
 
 \subsection{Tøída znakù}
-Velmi uiteèná je také tøída znakù \verb|[]|. Tøída znakù slouí k rozpoznání libovolného znaku nebo nìkolika znakù uvnitø hranatıch závorek. Regulární vıraz \verb|[abc]| zachytí buï \uv{a} nebo \uv{b} nebo \uv{c}. Uvnitø tøídy znakù lze pouívat všechny metaznaky krom \verb|^\-| a \verb|]| bez zpìtného lomítka, jeliko uvnitø hranatıch závorek ztrácejí svojí speciální funkci. V jazycích Java a .NET mezi metaznaky v tøídì znakù patøí také \verb|[|.[s.31--32]{5}
+Velmi uiteèná je také tøída znakù \verb|[]|. Tøída znakù slouí k rozpoznání libovolného znaku nebo nìkolika znakù uvnitø hranatıch závorek. Regulární vıraz \verb|[abc]| zachytí buï \uv{a} nebo \uv{b} nebo \uv{c}. Uvnitø tøídy znakù lze pouívat všechny metaznaky krom \verb|^\-| a \verb|]| bez zpìtného lomítka, jeliko uvnitø hranatıch závorek ztrácejí svojí speciální funkci. V jazycích Java a .NET mezi metaznaky v tøídì znakù patøí také \verb|[|.\cite[s.31--32]{5}
 
 To proto, e tøída znakù v jazyce Java také umoòuje intersekce. Syntaxe intersekcí je následující: \verb|[tøída&&[intersekce]]|. Pomocí intersekce je moné napøíklad vynechat nìkteré znaky, které by jinak zahrnoval interval. Regulární vıraz \verb|[ac-fh-qs-y]| tak mùeme zapsat následovnì: \verb|[a-z&&[^bgrz]]|.\cite{9}
 
@@ -316,7 +323,7 @@ Atomické seskupování není podporováno v jazyce Javascript a AWK.
  \begin{figure}[h!]
 	\centering
 		\includegraphics{srovnani.PNG}
-	\caption{Srovnání poètu krokù v jazyce PCRE (php)}
+	\caption{Srovnání poètu krokù v PCRE (php)}
 	\label{fig:obr5}
 \end{figure}
 
@@ -349,17 +356,17 @@ Synataxe pro unicode písma \verb|\p{nazev_skriptu}| je podporována v Javì (od ve
 
 \uv{Negativní lookbehind} \verb|(?<! ... )| se chová podobnì jako negativní lookahead, s tím rozdílem, e kontroluje øetìzec doleva od dané pozice. Regulární vıraz \verb|(?<!bc)df| neuspìje na øetìzci \uv{bcdf}, ale na \uv{aa\textbf{df}} ano. Negativní lookbehind je podporován v jazycích Java, Perl a PCRE.
 
-Negativní a pozitivní lookbehind nepodporuje kvantifikátory, které umoòují nekoneèné opakování jako \verb|* + {1,}|. To proto, e  \cite[s.75-77]{5}
+Negativní a pozitivní lookbehind nepodporuje kvantifikátory, které umoòují nekoneèné opakování jako \verb|* + {1,}|. To proto, e program s implementací regulárních vırazù ète pouze zleva doprava. Ovšem Java nebo PCRE tuto monost umoòují. Spoèítají kolik znakù mùe bıt v porovnávaném textu nejvıše a nejménì nalezeno. Porovnávání pak probíhá tak, e zaènou porovnávat od nejmenšího poètu znakù a porovnávají text se vzorem zleva doprava.\cite[s.75-77]{5}
 
 \section{Zachycování (capture)}
 Zachycování neboli anglicky \uv{capture} slouí k zachycení urèité èásti vırazu. K tomu slouí kulaté závorky () (viz. podkapitola Metaznaky). Zachycení pak má celou øadu vyuití jako napø. za úèelem nahrazení, zpìtné odkazy atd... Text je pak zachycen v oddìlenıch skupinách, které se èíslují od jedné do nekoneèna.
 
 V pøípadì, e nechceme, aby regulární vıraz zachytil nìkterou èást textu mùeme danou èást umístit do \verb|(?: ... )|. Tatot syntaxe se dá vyuít zejména pøi alternaci (viz. podkapitola Metaznaky). Regulární vıraz \verb|(jablka) (?:a|nebo) (hrušky)| na øetìzci \uv{jablka a hrušky} zachytí \uv{jablka} jako první skupinu a \uv{hrušky} jako druhou skupinu. Narozdíl od \verb|(jablka) (a|nebo) (hrušky)|, kde druhá skupina obsahuje \uv{a} a \uv{hrušky} jsou obsaeny a ve tøetí skupinì.
-Tato syntaxe je podporována v jazyce Java, Perl i Javascript. Jazyk Perl navíc umoòuje nezachycení èásti v kulatıch závorkách pomocí vlajeèky \textit{n}.
+Tato syntaxe je podporována v jazyce Java, Perl i Javascript. Jazyk Perl navíc umoòuje nezachycení èásti v kulatıch závorkách pomocí modifikátoru \textit{n}.
 
 Dle oznaèení skupin je pak moné se na nì odkazovat. V jazycích Perl, Javascript nebo Java je moné odkazovat na zachycenı text pomocí zpìtného lomítka a èísla dané skupiny (napø. \verb|\1| odkazuje na první zachycenou skupinu ve vırazu). Regulární vıraz \verb!(\w)(\w)\2\1!, pak uspìje na øetìzci \uv{alla}. Jazyk Perl umoòuje dojít ke stejnému vısledku i pøi pouití jiné syntaxe \verb|(\w)(\w)\g2\g1|. Jazyk AWK ukládá text do pole, tudí se s ním mùe dále pracovat jako s polokami v poli (viz. kapitola AWK).
 
-Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazovat pomocí daného názvu, pomocí sytaxe \verb|(?P<nazev>...)(?P=nazev)| v PCRE2 i jazyce Perl nebo \verb|(\k<nazev>...)\k<nazev)>|. Vıše uvedenı regulární vıraz dospìje ke stejnému vısledku i touto syntaxí : \verb|(?P<ovoce>jablka) a (?P=ovoce)| nebo \verb|(?<ovoce>jablka) a \k<ovoce>|. Pojmenovávání skupin není podporováno v jazyce Javascript a AWK.
+Regulární vırazy také umoòují zachycené skupiny pojmenovávat a pak na nì odkazovat pomocí daného názvu. Uívá k tomu sytaxe \verb|(?P<nazev>...)(?P=nazev)| v PCRE2 i jazyce Perl nebo \verb|(\k<nazev>...)\k<nazev)>|. Vıše uvedenı regulární vıraz dospìje ke stejnému vısledku i takto : \verb|(?P<ovoce>jablka)| a \verb|(?P=ovoce)| nebo \verb|(?<ovoce>jablka)| a \verb|\k<ovoce>|. Pojmenovávání skupin není podporováno v jazyce Javascript a AWK.
 
 
 \chapter{Pouití v programovacích jazycích}
@@ -532,7 +539,7 @@ Regulární vırazy v Javascriptu se zapisují mezi dvì lomítka \verb|/.../| a mofig
 Pokud chceme regulární vıraz pouít na více øetìzcù, lze objekt regulárního vırazu jednoduše vytvoøit pøiøazením promìnné. Objekt regulárního vırazu mùeme také vytvoøit z textového øetìzce pomocí konstruktoru \textit{RegExp}. Tento konstruktor mùe mít buï jeden parametr, obsahující regulární vıraz bez lomítek, a nebo dva parametry, z nich první obsahuje regulární vıraz bez lomítek a druhı vlajeèku. Pøi vytváøení objektu regulárního vırazu mùe dojít k vıjimce \textit{SyntaxError}, která, jak u název napovídá, je vyvolána pøi zadání vırazu s nesprávnou syntaxí.\cite{18}
 
 \begin{lstlisting}
-//Metoda zjištuje zda byla zadána i vlajeèka a poté vytvoøí regulární vıraz pomocí kontruktoru RegExp
+//Metoda zjištuje zda byla zadána i vlajeèka a poté vytvoøí regulární vıraz pomocí konstruktoru RegExp
 function prevodReg(reg,f){
 	var vystup;
 	try{
@@ -582,7 +589,7 @@ Takto vytvoøenı RegExp objekt dìdí po svém pøedku metody:
 
 Napøíklad pøi zadání regulárního vırazu: \verb|[12][0-9]{3}| a øetìzce \uv{v roce 1990}, vıøe uvedená metoda vypíše do konzole: \verb|['1990',index: 7,input: 'v roce 1990']|. Na první pozici se nachází èást øetìzce odpovídající vzoru. Index znaèí pozici, na které se nachází \uv{1990}. Input pak ukazuje vloenı øetìzec.
 
-Pro nahrazení èásti øetìzce odpovídající danému vzoru, slouí metoda \textit{String.prototype.replace()}. Metoda vrací novı øetìzec tvoøenı pùvodním øetìzecem s nahrazenımi èástmi. Jako parametr mùe bıt pouit, jak regulární vıraz ve tvaru øetìzce (string), tak i jako objekt RegExp. Druhım parametrem je nahrazující øetìzec, kterı mùe bıt zadán jako string nebo jako metoda, která se zavolá pøi kadém pouití daného regulárního vırazu.. \cite{21}
+Metoda \textit{String.prototype.replace()} slouí pro nahrazení èásti øetìzce odpovídající danému vzoru. Metoda vrací novı øetìzec tvoøenı pùvodním øetìzecem s nahrazenımi èástmi. Jako parametr mùe bıt pouit, jak regulární vıraz ve tvaru øetìzce (string), tak i jako objekt RegExp. Druhım parametrem je nahrazující øetìzec, kterı mùe bıt zadán jako string nebo jako metoda, která se zavolá pøi kadém pouití daného regulárního vırazu.. \cite{21}
 
 \begin{lstlisting}
 //metoda slouí k nahrazení èásti zadaného øetìzce (str), která odpovídá regulárnímu vırazu (reg)
@@ -732,7 +739,7 @@ Pro vıše uvedené je dùleité mít danou verzi nainstalovanou. To lze zjistit pomo
 
 Pokud nejsou zadány ádné soubory je moné ppracovat s programem pøes pøíkazovou øádku.To vyaduje zadání parametru \verb|re>| a \verb|data>|. Parametr \verb|re>| znaèí vzor ve podobì regulárního vırazu a za parametr \verb|data>| se dosadí textovı øetìzec, se kterım se má vzor porovnávat. Pro porovnávání je spuštìna funkce \verb|pcre2_match()|, která, kdy uspìje, vrátí seznam zachycenıch èástí vstupního textu. Seznam je èíslovanı od 0, kde je vypsáná celá èást textu odpovídajícím vzoru. V níe uvedeném pøíkladì je nelezenou èástí \uv{lampi}. Další polokou s èíslem 1 je pak zachycená èást v kulatıch závorkách, tedy \uv{lamp} v níe uvedeném pøíkladì. Pokud není shoda nalezena vrátí funkce \uv{No match} (èesky \uv{ádná shoda}). \cite{24}
 
-\begin{verbatim}
+\begin{lstlisting}
 C:\>pcre2test
 PCRE2 version 10.20 2015-06-30
 	re> /(lamp|lampion|la).?/
@@ -741,11 +748,11 @@ PCRE2 version 10.20 2015-06-30
 	1: lamp
 	data> gg
 	No match
-\end{verbatim}
+\end{lstlisting}
  
 Pomocí tohoto algoritmu postupuje i Perl 5. Pøi alternaci postupuje zleva a kdy najde první shodu, porovnávání se ukonèí. PCRE2 ovšem umoòuje vyuití i deterministického koneèného automatu. K tomu slouí funkce \verb|pcre2_dfa_match()|. K jejímu volání je tøeba za vstupní text napsat \uv{\textbackslash=dfa}. Poté se vypíší všechny nálezy v alternaci, bez ohledu na to v jakém poøadí jsou v alternaci zapsány(viz. pøíklad níe). \cite{24}
 
-\begin{verbatim}
+\begin{lstlisting}
 C:\>pcre2test
 PCRE2 version 10.20 2015-06-30
 	re> /(lamp|lampion|la)/
@@ -753,25 +760,25 @@ PCRE2 version 10.20 2015-06-30
 	0: lampion
 	1: lamp
 	2: la
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Syntaxe}
 Jak ji bylo zmínìno v úvodu této kapitoly, PCRE2 nabízí v regulárních vırazech funkce odlišné od syntaxe v Perlu. 
 
 Umoòuje napøíklad nastavení (*UCP), které zpùsobuje, e\verb|\w| a \verb|\d| rozeznají i znaky s kódováním Unicode. Pouití je moné vidìt na následujícím pøíkladu.
 
-\begin{verbatim}
+\begin{lstlisting}
 C:\>pcre2test
 PCRE2 version 10.20 2015-06-30
 	re> /(*UCP)\w{2,}/
 	data> Øecko
 	0: \xfcecko
 	
-\end{verbatim}
+\end{lstlisting}
 
 Stejnì jako u ostatních modifikací regulárních vırazù je i v PCRE2 tøeba metaznaky tzv. \uv{escapovat}. Ovšem PCRE2 umoòuje také zrušení vıznamu metaznakù pomocí \verb|\Q ... \E|.
 
-\begin{verbatim}
+\begin{lstlisting}
 C:\>pcre2test
 PCRE2 version 10.20 2015-06-30
 	re> /\Qabc?$d\E/
@@ -780,11 +787,11 @@ PCRE2 version 10.20 2015-06-30
 	re> /abc\?\$d/
 	data> abc?$d
 	0: abc?$d
-\end{verbatim}
+\end{lstlisting}
 
 Jak je vidìt na pøíkladu vıše, je tak moné \uv{vypnout} funkci u více metaznakù najednou bez nutnosti zápisu zpìtného lomítka pøed kadı zvláš.
 
-Vıznamné rozdíly mezi Perl a PCRE2 syntaxí lze najít v rekursivním vyhledávání. http://www.pcre.org/current/doc/html/pcre2pattern.html#SEC23
+
 
 \begin{thebibliography}{99}
 

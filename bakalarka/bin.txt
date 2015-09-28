@@ -1,0 +1,13 @@
+﻿https://www.gnu.org/software/gawk/manual/html_node/Regexp.html#Regexp
+
+https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html
+
+https://www.debuggex.com/
+https://docs.oracle.com/javase/tutorial/essential/regex/matcher.html
+
+http://www.math.utah.edu/docs/info/gawk_5.html
+
+http://matt.might.net/articles/sculpting-text/
+
+$ echo "blah foo123bar blah" | awk "{match($2,\"[a-z]+[0-9]+\",a)}END{print a[0]} "
+
